@@ -1,0 +1,31 @@
+<?xml version='1.0'?>
+
+<robot name="insect" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!--##################################################################################################################################-->
+<!--xacro parameters-->
+<!--torso parameters-->
+<xacro:property name="torso_mass" value="8.0"/>
+
+<!--legs parameters-->
+<!--left_front_leg parameters-->
+<xacro:property name="l_f_leg_mass" value="0.8"/>
+<!--left_back_leg parameters-->
+<xacro:property name="r_b_leg_mass" value="0.8"/>
+<!--right_front_leg parameters-->
+<xacro:property name="r_f_leg_mass" value="1.0"/>
+<!--right_back_leg parameters-->
+<xacro:property name="r_b_leg_mass" value="1.0"/>
+
+<!--hips parameters-->
+<!--left_front_hip parameters-->
+<xacro:property name="l_f_hip_mass" value="0.8"/>
+<!--left_back_hip parameters-->
+<xacro:property name="r_b_hip_mass" value="0.8"/>
+<!--right_front_hip parameters-->
+<xacro:property name="r_f_hip_mass" value="1.0"/>
+<!--right_back_hip parameters-->
+<xacro:property name="r_b_hip_mass" value="1.0"/>
+
+<!--motors parameters-->
+<!-->
