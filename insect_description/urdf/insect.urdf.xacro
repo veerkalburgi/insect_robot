@@ -28,4 +28,274 @@
 <xacro:property name="r_b_hip_mass" value="1.0"/>
 
 <!--motors parameters-->
-<!-->
+<!--left_front_motor parameters-->
+<xacro:property name="l_f_motor_mass" value="0.8"/>
+<!--left_back_hip parameters-->
+<xacro:property name="r_b_motor_mass" value="0.8"/>
+<!--right_front_hip parameters-->
+<xacro:property name="r_f_motor_mass" value="1.0"/>
+<!--right_back_hip parameters-->
+<xacro:property name="r_b_motor_mass" value="1.0"/>
+
+<!--#############################################################################################################################-->
+
+
+<link name="world"/>
+<link name='torso_base'>
+
+  <inertial>
+    <mass value="${torso_mass}"/>
+
+    <!--origin xyz="0 0 0.2" rpy="0 0 0"/-->
+      <!--origin xyz="-0.536511 0.016494 0.000002" rpy="0 0.000004 -0.000730"/-->
+    <inertia
+      ixx="0.08" ixy="0" ixz="0"
+      iyy="0.08" iyz="0"
+      izz="0.08"
+      />
+    </inertial>
+    <collision name='torso_collision'>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/torso_v1.dae"/>
+      </geometry>
+    </collision>
+
+    <visual name="torso_visual">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/torso_v1.dae"/>
+      </geometry>
+    </visual>
+    <sensor name='my_contact' type='contact'>
+          <contact>
+            <collision>torso_collision</collision>
+          </contact>
+    </sensor>
+  </link>
+  <link name= "l_f_motor">
+    <collision name='l_f_motor_collision'>
+      <origin xyz="0 0 0" rpy="0 -0.5 -1.5"/>
+        <geometry>
+          <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/motor_v1.dae"/>
+        </geometry>
+      </collision>
+
+      <visual name="l_f_motor_visual">
+        <origin xyz="0 0 0" rpy="0 -0.5 -1.5"/>
+        <geometry>
+          <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/motor_v1.dae"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name= "r_f_motor">
+      <collision name='l_f_motor_collision'>
+        <origin xyz="0 0 0" rpy="0 -0.5 1.5"/>
+          <geometry>
+            <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/motor_v1.dae"/>
+          </geometry>
+        </collision>
+
+        <visual name="r_f_motor_visual">
+          <origin xyz="0 0 0" rpy="0 -0.5 1.5"/>
+          <geometry>
+            <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/motor_v1.dae"/>
+          </geometry>
+        </visual>
+      </link>
+
+      <link name= "l_b_motor">
+        <collision name='l_b_motor_collision'>
+          <origin xyz="0 0 0" rpy="0 -0.5 -1.5"/>
+            <geometry>
+              <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/motor_v1.dae"/>
+            </geometry>
+          </collision>
+
+          <visual name="l_b_motor_visual">
+            <origin xyz="0 0 0" rpy="0 -0.5 -1.5"/>
+            <geometry>
+              <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/motor_v1.dae"/>
+            </geometry>
+          </visual>
+        </link>
+
+        <link name= "r_b_motor">
+          <collision name='r_b_motor_collision'>
+            <origin xyz="0 0 0" rpy="0 -0.5 1.5"/>
+              <geometry>
+                <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/motor_v1.dae"/>
+              </geometry>
+            </collision>
+
+            <visual name="r_b_motor_visual">
+              <origin xyz="0 0 0" rpy="0 -0.5 1.5"/>
+              <geometry>
+                <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/motor_v1.dae"/>
+              </geometry>
+            </visual>
+          </link>
+
+          <link name= "l_f_hip">
+            <collision name='l_f_hip_collision'>
+              <origin xyz="0 0 0" rpy="0 -0.5 -1.5"/>
+                <geometry>
+                  <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/hip_v1.dae"/>
+                </geometry>
+              </collision>
+
+              <visual name="l_f_hip_visual">
+                <origin xyz="0 0 0" rpy="0 -0.5 -1.5"/>
+                <geometry>
+                  <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/hip_v1.dae"/>
+                </geometry>
+              </visual>
+            </link>
+
+            <link name= "r_f_hip">
+              <collision name='l_f_hip_collision'>
+                <origin xyz="0 0 0" rpy="0 -0.5 1.5"/>
+                  <geometry>
+                    <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/hip_v1.dae"/>
+                  </geometry>
+                </collision>
+
+                <visual name="r_f_hip_visual">
+                  <origin xyz="0 0 0" rpy="0 -0.5 1.5"/>
+                  <geometry>
+                    <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/hip_v1.dae"/>
+                  </geometry>
+                </visual>
+              </link>
+
+              <link name= "l_b_hip">
+                <collision name='l_b_hip_collision'>
+                  <origin xyz="0 0 0" rpy="0 -0.5 -1.5"/>
+                    <geometry>
+                      <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/hip_v1.dae"/>
+                    </geometry>
+                  </collision>
+
+                  <visual name="l_b_hip_visual">
+                    <origin xyz="0 0 0" rpy="0 -0.5 -1.5"/>
+                    <geometry>
+                      <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/hip_v1.dae"/>
+                    </geometry>
+                  </visual>
+                </link>
+
+                <link name= "r_b_hip">
+                  <collision name='r_b_hip_collision'>
+                    <origin xyz="0 0 0" rpy="0 -0.5 1.5"/>
+                      <geometry>
+                        <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/hip_v1.dae"/>
+                      </geometry>
+                    </collision>
+
+                    <visual name="r_b_hip_visual">
+                      <origin xyz="0 0 0" rpy="0 -0.5 1.5"/>
+                      <geometry>
+                        <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/hip_v1.dae"/>
+                      </geometry>
+                    </visual>
+                  </link>
+
+                  <link name= "l_f_h_motor">
+                    <collision name='l_f_h_motor_collision'>
+                      <origin xyz="0 0 0" rpy="0 -3.4 -1.5"/>
+                        <geometry>
+                          <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/motor_h_v1.dae"/>
+                        </geometry>
+                      </collision>
+
+                      <visual name="l_f_h_motor_visual">
+                        <origin xyz="0 0 0" rpy="0 -3.4 -1.5"/>
+                        <geometry>
+                          <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/motor_h_v1.dae"/>
+                        </geometry>
+                      </visual>
+                    </link>
+                    <link name= "r_f_h_motor">
+                      <collision name='l_f_h_motor_collision'>
+                        <origin xyz="0 0 0" rpy="0 -3.4 -1.5"/>
+                          <geometry>
+                            <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/motor_h_v1.dae"/>
+                          </geometry>
+                        </collision>
+
+                        <visual name="r_f_h_motor_visual">
+                          <origin xyz="0 0 0" rpy="0 -3.4 1.5"/>
+                          <geometry>
+                            <mesh filename="file:///home/veer/catkin_ws/src/insect_description/meshes/motor_h_v1.dae"/>
+                          </geometry>
+                        </visual>
+                      </link>
+
+  <joint name="world_joint"  type="fixed">
+    <origin xyz="0 0 0.2" rpy="0 0 0" />
+    <parent link="world"/>
+    <child link="torso_base"/>
+</joint>
+
+<joint name="l_f_motor_joint"  type="fixed">
+  <origin xyz="0.048 0.08 -0.08" rpy="0 0 0" />
+  <parent link="torso_base"/>
+  <child link="l_f_motor"/>
+</joint>
+
+<joint name="r_f_motor_joint"  type="fixed">
+  <origin xyz="0.048 -0.09 -0.08" rpy="0 0 0" />
+  <parent link="torso_base"/>
+  <child link="r_f_motor"/>
+</joint>
+
+<joint name="l_b_motor_joint"  type="fixed">
+  <origin xyz="-0.2 0.08 -0.08" rpy="0 0 0" />
+  <parent link="torso_base"/>
+  <child link="l_b_motor"/>
+</joint>
+
+<joint name="r_b_motor_joint"  type="fixed">
+  <origin xyz="-0.2 -0.09 -0.08" rpy="0 0 0" />
+  <parent link="torso_base"/>
+  <child link="r_b_motor"/>
+</joint>
+
+<joint name="l_f_hip_joint"  type="fixed">
+  <origin xyz="0.006 0.01 -0.067" rpy="0 0 0" />
+  <parent link="l_f_motor"/>
+  <child link="l_f_hip"/>
+</joint>
+
+<joint name="r_f_hip_joint"  type="fixed">
+  <origin xyz="0.006 -0.01 -0.067" rpy="0 0 0" />
+  <parent link="r_f_motor"/>
+  <child link="r_f_hip"/>
+</joint>
+
+<joint name="l_b_hip_joint"  type="fixed">
+  <origin xyz="0.006 0.01 -0.067" rpy="0 0 0" />
+  <parent link="l_b_motor"/>
+  <child link="l_b_hip"/>
+</joint>
+
+<joint name="r_b_hip_joint"  type="fixed">
+  <origin xyz="-0.006 -0.01 -0.067" rpy="0 0 0" />
+  <parent link="r_b_motor"/>
+  <child link="r_b_hip"/>
+</joint>
+
+<joint name="l_f_h_motor_joint"  type="fixed">
+  <origin xyz="-0.013 0.163 0.088" rpy="0 0 0" />
+  <parent link="l_f_hip"/>
+  <child link="l_f_h_motor"/>
+</joint>
+
+<joint name="r_f_h_motor_joint"  type="fixed">
+  <origin xyz="0.02 -0.155 0.088" rpy="0 0 0" />
+  <parent link="r_f_hip"/>
+  <child link="r_f_h_motor"/>
+</joint>
+
+</robot>
