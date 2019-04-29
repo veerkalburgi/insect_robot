@@ -1,4 +1,4 @@
-<?xml version='1.0'?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <robot name="insect" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
@@ -9,6 +9,7 @@
 <!--macro param-->
 <xacro:macro name="default_inertial" params="mass">
    <inertial>
+     <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
      <mass value="${mass}" />
      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
    </inertial>
@@ -20,13 +21,21 @@
 <collision name="collision">
   <origin xyz="0 0 0" rpy="0 0 0"/>
   <geometry>
+<<<<<<< HEAD
+    <mesh filename="package://insect_description/meshes/torso_v1.dae" />
+=======
     <mesh filename="package://insect_description/meshes/torso_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
   </geometry>
 </collision>
 <visual name="visual">
   <origin xyz="0 0 0" rpy="0 0 0"/>
   <geometry>
+<<<<<<< HEAD
+    <mesh filename="package://insect_description/meshes/torso_v1.dae" />
+=======
     <mesh filename="package://insect_description/meshes/torso_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
   </geometry>
 </visual>
 <xacro:default_inertial mass="0.8"/>
@@ -52,31 +61,47 @@
     <collision name="collision">
       <origin xyz="0 0 0" rpy="0 -0.5 -1.5"/>
         <geometry>
+<<<<<<< HEAD
+          <mesh filename="package://insect_description/meshes/motor_v1.dae" />
+=======
           <mesh filename="package://insect_description/meshes/motor_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
         </geometry>
       </collision>
 
       <visual name="visual">
         <origin xyz="0 0 0" rpy="0 -0.5 -1.4"/>
         <geometry>
+<<<<<<< HEAD
+          <mesh filename="package://insect_description/meshes/motor_v1.dae" />
+=======
           <mesh filename="package://insect_description/meshes/motor_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
         </geometry>
       </visual>
       <xacro:default_inertial mass="0.2"/>
     </link>
 
-    <link name= "r_f_motor">
+    <!--link name= "r_f_motor">
       <collision name="collision">
         <origin xyz="0 0 0" rpy="0 -0.5 1.5"/>
           <geometry>
+<<<<<<< HEAD
+            <mesh filename="package://insect_description/meshes/motor_v1.dae" />
+=======
             <mesh filename="package://insect_description/meshes/motor_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
           </geometry>
         </collision>
 
         <visual name="visual">
           <origin xyz="0 0 0" rpy="0 -0.5 1.5"/>
           <geometry>
+<<<<<<< HEAD
+            <mesh filename="package://insect_description/meshes/motor_v1.dae" />
+=======
             <mesh filename="package://insect_description/meshes/motor_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
           </geometry>
         </visual>
         <xacro:default_inertial mass="0.2"/>
@@ -85,14 +110,22 @@
         <collision name="collision">
           <origin xyz="0 0 0" rpy="0 -0.5 -1.5"/>
             <geometry>
+<<<<<<< HEAD
+              <mesh filename="package://insect_description/meshes/motor_v1.dae" />
+=======
               <mesh filename="package://insect_description/meshes/motor_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
             </geometry>
           </collision>
 
           <visual name="visual">
             <origin xyz="0 0 0" rpy="0 -0.5 -1.5"/>
             <geometry>
+<<<<<<< HEAD
+              <mesh filename="package://insect_description/meshes/motor_v1.dae" />
+=======
               <mesh filename="package://insect_description/meshes/motor_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
             </geometry>
           </visual>
           <xacro:default_inertial mass="0.2"/>
@@ -102,46 +135,70 @@
           <collision name="collision">
             <origin xyz="0 0 0" rpy="0 -0.5 1.5"/>
               <geometry>
+<<<<<<< HEAD
+                <mesh filename="package://insect_description/meshes/motor_v1.dae" />
+=======
                 <mesh filename="package://insect_description/meshes/motor_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
               </geometry>
             </collision>
 
             <visual name="visual">
               <origin xyz="0 0 0" rpy="0 -0.5 1.5"/>
               <geometry>
+<<<<<<< HEAD
+                <mesh filename="package://insect_description/meshes/motor_v1.dae" />
+=======
                 <mesh filename="package://insect_description/meshes/motor_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
               </geometry>
             </visual>
             <xacro:default_inertial mass="0.2"/>
-          </link>
+          </link-->
           <link name= "l_f_hip">
             <collision name="collision">
               <origin xyz="0 0 0" rpy="0 -0.5 -1.5"/>
                 <geometry>
+<<<<<<< HEAD
+                  <mesh filename="package://insect_description/meshes/hip_v1.dae" />
+=======
                   <mesh filename="package://insect_description/meshes/hip_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                 </geometry>
               </collision>
 
               <visual name="visual">
                 <origin xyz="0 0 0" rpy="0 -0.5 -1.5"/>
                 <geometry>
+<<<<<<< HEAD
+                  <mesh filename="package://insect_description/meshes/hip_v1.dae" />
+=======
                   <mesh filename="package://insect_description/meshes/hip_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                 </geometry>
               </visual>
               <xacro:default_inertial mass="0.4"/>
             </link>
-            <link name= "r_f_hip">
+            <!--link name= "r_f_hip">
               <collision name="collision">
                 <origin xyz="0 0 0" rpy="0 -0.5 1.5"/>
                   <geometry>
+<<<<<<< HEAD
+                    <mesh filename="package://insect_description/meshes/hip_v1.dae" />
+=======
                     <mesh filename="package://insect_description/meshes/hip_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                   </geometry>
                 </collision>
 
                 <visual name="visual">
                   <origin xyz="0 0 0" rpy="0 -0.5 1.5"/>
                   <geometry>
+<<<<<<< HEAD
+                    <mesh filename="package://insect_description/meshes/hip_v1.dae" />
+=======
                     <mesh filename="package://insect_description/meshes/hip_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                   </geometry>
                 </visual>
                 <xacro:default_inertial mass="0.4"/>
@@ -150,14 +207,22 @@
                 <collision name="collision">
                   <origin xyz="0 0 0" rpy="0 -0.5 -1.5"/>
                     <geometry>
+<<<<<<< HEAD
+                      <mesh filename="package://insect_description/meshes/hip_v1.dae" />
+=======
                       <mesh filename="package://insect_description/meshes/hip_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                     </geometry>
                   </collision>
 
                   <visual name="visual">
                     <origin xyz="0 0 0" rpy="0 -0.5 -1.5"/>
                     <geometry>
+<<<<<<< HEAD
+                      <mesh filename="package://insect_description/meshes/hip_v1.dae" />
+=======
                       <mesh filename="package://insect_description/meshes/hip_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                     </geometry>
                   </visual>
                   <xacro:default_inertial mass="0.4"/>
@@ -166,14 +231,22 @@
                   <collision name="collision">
                     <origin xyz="0 0 0" rpy="0 -0.5 1.5"/>
                       <geometry>
+<<<<<<< HEAD
+                        <mesh filename="package://insect_description/meshes/hip_v1.dae" />
+=======
                         <mesh filename="package://insect_description/meshes/hip_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                       </geometry>
                     </collision>
 
                     <visual name="visual">
                       <origin xyz="0 0 0" rpy="0 -0.5 1.5"/>
                       <geometry>
+<<<<<<< HEAD
+                        <mesh filename="package://insect_description/meshes/hip_v1.dae" />
+=======
                         <mesh filename="package://insect_description/meshes/hip_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                       </geometry>
                     </visual>
                     <xacro:default_inertial mass="0.4"/>
@@ -182,14 +255,22 @@
                     <collision name="collision">
                       <origin xyz="0 0 0" rpy="0 -3.4 -1.5"/>
                         <geometry>
+<<<<<<< HEAD
+                          <mesh filename="package://insect_description/meshes/motor_h_v1.dae" />
+=======
                           <mesh filename="package://insect_description/meshes/motor_h_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                         </geometry>
                       </collision>
 
                       <visual name="visual">
                         <origin xyz="0 0 0" rpy="0 -3.4 -1.5"/>
                         <geometry>
+<<<<<<< HEAD
+                          <mesh filename="package://insect_description/meshes/motor_h_v1.dae" />
+=======
                           <mesh filename="package://insect_description/meshes/motor_h_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                         </geometry>
                       </visual>
                       <xacro:default_inertial mass="0.2"/>
@@ -198,14 +279,22 @@
                       <collision name="collision">
                         <origin xyz="0 0 0" rpy="0 -3.4 -1.5"/>
                           <geometry>
+<<<<<<< HEAD
+                            <mesh filename="package://insect_description/meshes/motor_h_v1.dae" />
+=======
                             <mesh filename="package://insect_description/meshes/motor_h_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                           </geometry>
                         </collision>
 
                         <visual name="visual">
                           <origin xyz="0 0 0" rpy="0 -3.4 1.5"/>
                           <geometry>
+<<<<<<< HEAD
+                            <mesh filename="package://insect_description/meshes/motor_h_v1.dae" />
+=======
                             <mesh filename="package://insect_description/meshes/motor_h_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                           </geometry>
                         </visual>
                         <xacro:default_inertial mass="0.2"/>
@@ -214,14 +303,22 @@
                         <collision name="collision">
                           <origin xyz="0 0 0" rpy="0 -3.4 -1.5"/>
                             <geometry>
+<<<<<<< HEAD
+                              <mesh filename="package://insect_description/meshes/motor_h_v1.dae" />
+=======
                               <mesh filename="package://insect_description/meshes/motor_h_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                             </geometry>
                           </collision>
 
                           <visual name="visual">
                             <origin xyz="0 0 0" rpy="0 -3.4 -1.5"/>
                             <geometry>
+<<<<<<< HEAD
+                              <mesh filename="package://insect_description/meshes/motor_h_v1.dae" />
+=======
                               <mesh filename="package://insect_description/meshes/motor_h_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                             </geometry>
                           </visual>
                           <xacro:default_inertial mass="0.2"/>
@@ -230,14 +327,22 @@
                           <collision name="collision">
                             <origin xyz="0 0 0" rpy="0 -3.4 -1.5"/>
                               <geometry>
+<<<<<<< HEAD
+                                <mesh filename="package://insect_description/meshes/motor_h_v1.dae" />
+=======
                                 <mesh filename="package://insect_description/meshes/motor_h_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                               </geometry>
                             </collision>
 
                             <visual name="visual">
                               <origin xyz="0 0 0" rpy="0 -3.4 1.5"/>
                               <geometry>
+<<<<<<< HEAD
+                                <mesh filename="package://insect_description/meshes/motor_h_v1.dae" />
+=======
                                 <mesh filename="package://insect_description/meshes/motor_h_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                               </geometry>
                             </visual>
                             <xacro:default_inertial mass="0.2"/>
@@ -246,14 +351,22 @@
                             <collision name="collision">
                               <origin xyz="0 0 0" rpy="0 0 -1.5"/>
                                 <geometry>
+<<<<<<< HEAD
+                                  <mesh filename="package://insect_description/meshes/leg_v1.dae" />
+=======
                                   <mesh filename="package://insect_description/meshes/leg_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                                 </geometry>
                               </collision>
 
                               <visual name="visual">
                                 <origin xyz="0 0 0" rpy="0 0 -1.5"/>
                                 <geometry>
+<<<<<<< HEAD
+                                  <mesh filename="package://insect_description/meshes/leg_v1.dae" />
+=======
                                   <mesh filename="package://insect_description/meshes/leg_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                                 </geometry>
                               </visual>
                               <xacro:default_inertial mass="0.4"/>
@@ -262,14 +375,22 @@
                               <collision name="collision">
                                 <origin xyz="0 0 0" rpy="0 0 -1.5"/>
                                   <geometry>
+<<<<<<< HEAD
+                                    <mesh filename="package://insect_description/meshes/leg_v1.dae" />
+=======
                                     <mesh filename="package://insect_description/meshes/leg_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                                   </geometry>
                                 </collision>
 
                                 <visual name="visual">
                                   <origin xyz="0 0 0" rpy="0 0 -1.5"/>
                                   <geometry>
+<<<<<<< HEAD
+                                    <mesh filename="package://insect_description/meshes/leg_v1.dae" />
+=======
                                     <mesh filename="package://insect_description/meshes/leg_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                                   </geometry>
                                 </visual>
                                 <xacro:default_inertial mass="0.4"/>
@@ -278,14 +399,22 @@
                                 <collision name="collision">
                                   <origin xyz="0 0 0" rpy="0 0 1.5"/>
                                     <geometry>
+<<<<<<< HEAD
+                                      <mesh filename="package://insect_description/meshes/leg_v1.dae" />
+=======
                                       <mesh filename="package://insect_description/meshes/leg_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                                     </geometry>
                                   </collision>
 
                                   <visual name="visual">
                                     <origin xyz="0 0 0" rpy="0 0 1.5"/>
                                     <geometry>
+<<<<<<< HEAD
+                                      <mesh filename="package://insect_description/meshes/leg_v1.dae" />
+=======
                                       <mesh filename="package://insect_description/meshes/leg_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                                     </geometry>
                                   </visual>
                                   <xacro:default_inertial mass="0.4"/>
@@ -294,18 +423,26 @@
                                   <collision name="collision">
                                     <origin xyz="0 0 0" rpy="0 0 1.5"/>
                                       <geometry>
+<<<<<<< HEAD
+                                        <mesh filename="package://insect_description/meshes/leg_v1.dae" />
+=======
                                         <mesh filename="package://insect_description/meshes/leg_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                                       </geometry>
                                     </collision>
 
                                     <visual name="visual">
                                       <origin xyz="0 0 0" rpy="0 0 1.5"/>
                                       <geometry>
+<<<<<<< HEAD
+                                        <mesh filename="package://insect_description/meshes/leg_v1.dae" />
+=======
                                         <mesh filename="package://insect_description/meshes/leg_v1.dae"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                                       </geometry>
                                     </visual>
                                     <xacro:default_inertial mass="0.4"/>
-                                  </link>
+                                  </link-->
 <!--############################################################################################################################-->
                                   <!--link name="hokuyo_link">
                                       <collision>
@@ -315,14 +452,22 @@
                                           </geometry>
                                       </collision>     <origin xyz="0 0 0" rpy="0 0 0"/>
                                           <geometry-->
+<<<<<<< HEAD
+                                              <!--mesh filename="package://insect/meshes/hokuyo.dae"/-->
+=======
                                               <!--mesh filename="package://://insect/meshes/hokuyo.dae"/-->
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                                               <!--mesh filename="package://insect_description/meshes/hokuyo.dae"/>
                                           </geometry>
 
                                       <visual>
                                           <origin xyz="0 0 0" rpy="0 0 0"/>
                                           <geometry-->
+<<<<<<< HEAD
+                                              <!--mesh filename="package://insect/meshes/hokuyo.dae"/-->
+=======
                                               <!--mesh filename="package://://insect/meshes/hokuyo.dae"/-->
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                                               <!--mesh filename="package://insect_description/meshes/hokuyo.dae"/>
                                           </geometry>
                                       </visual>
@@ -338,12 +483,16 @@
 <!-- Joint properties -->
 <xacro:property name="joint_lower_limit" value="-${3.14}"/>
 <xacro:property name="joint_upper_limit" value="${3.14}"/>
-<xacro:property name="joint_effort" value="6.0"/>
+<xacro:property name="joint_effort" value="2.0"/>
 <xacro:property name="joint_velocity" value="0.524"/>
 
 <!--######################################################################################################################################-->
 <!--joint name="hokuyo_joint" type="fixed">
+<<<<<<< HEAD
+    <origin xyz="0.04 0 0.08" rpy="0 0 0"/>
+=======
     <origin xyz="0 0 0.08" rpy="0 0 0"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
     <parent link="torso_base"/>
     <child link="hokuyo_link"/>
 </joint-->
@@ -353,7 +502,11 @@
   <origin xyz="0 0 0.30" rpy="0 0 0" />
   <parent link="world"/>
   <child link="torso_base"/>
+<<<<<<< HEAD
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+=======
   <axis xyz="0 1 0" rpy="0 0 0"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
 </joint>
 <!--IMU sensor joint-->
 <joint name="imu_joint" type="fixed">
@@ -367,27 +520,57 @@
   <origin xyz="0.048 0.08 -0.08" rpy="0 0 0" />
   <parent link="torso_base"/>
   <child link="l_f_motor"/>
+<<<<<<< HEAD
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+=======
   <axis xyz="0 1 0" rpy="0 0 0"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
 </joint>
 
-<joint name="r_f_motor_joint"  type="fixed">
+<!--joint name="r_f_motor_joint"  type="fixed">
   <origin xyz="0.048 -0.09 -0.08" rpy="0 0 0" />
   <parent link="torso_base"/>
   <child link="r_f_motor"/>
+<<<<<<< HEAD
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+=======
   <axis xyz="0 1 0" rpy="0 0 0"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
 </joint>
 
 <joint name="l_b_motor_joint"  type="fixed">
   <origin xyz="-0.2 0.08 -0.08" rpy="0 0 0" />
   <parent link="torso_base"/>
   <child link="l_b_motor"/>
+<<<<<<< HEAD
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+=======
   <axis xyz="0 1 0" rpy="0 0 0"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
 </joint>
 
 <joint name="r_b_motor_joint"  type="fixed">
   <origin xyz="-0.2 -0.09 -0.08" rpy="0 0 0" />
   <parent link="torso_base"/>
   <child link="r_b_motor"/>
+<<<<<<< HEAD
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+</joint-->
+
+<joint name="l_f_hip_joint"  type="revolute">
+  <origin xyz="0.006 0.15 0.0" rpy="0 0 0" />
+  <parent link="l_f_motor"/>
+  <child link="l_f_hip"/>
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+  <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+</joint>
+
+<!--joint name="r_f_hip_joint"  type="fixed">
+  <origin xyz="0.006 -0.01 -0.067" rpy="0 0 0" />
+  <parent link="r_f_motor"/>
+  <child link="r_f_hip"/>
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+=======
   <axis xyz="0 1 0" rpy="0 0 0"/>
 </joint>
 
@@ -403,47 +586,79 @@
   <parent link="r_f_motor"/>
   <child link="r_f_hip"/>
   <axis xyz="0 1 0" rpy="0 0 0"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
 </joint>
 
 <joint name="l_b_hip_joint"  type="fixed">
   <origin xyz="0.006 0.01 -0.067" rpy="0 0 0" />
   <parent link="l_b_motor"/>
   <child link="l_b_hip"/>
+<<<<<<< HEAD
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+=======
   <axis xyz="0 1 0" rpy="0 0 0"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
 </joint>
 
 <joint name="r_b_hip_joint"  type="fixed">
   <origin xyz="-0.006 -0.01 -0.067" rpy="0 0 0" />
   <parent link="r_b_motor"/>
   <child link="r_b_hip"/>
+<<<<<<< HEAD
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+=======
   <axis xyz="0 1 0" rpy="0 0 0"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
 </joint>
 
 <joint name="l_f_h_motor_joint"  type="fixed">
   <origin xyz="-0.014 0.163 0.088" rpy="0 0 0" />
   <parent link="l_f_hip"/>
   <child link="l_f_h_motor"/>
+<<<<<<< HEAD
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+=======
   <axis xyz="0 1 0" rpy="0 0 0"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
 </joint>
 
 <joint name="r_f_h_motor_joint"  type="fixed">
   <origin xyz="-0.010 -0.165 0.088" rpy="0 0 0" />
   <parent link="r_f_hip"/>
   <child link="r_f_h_motor"/>
+<<<<<<< HEAD
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+=======
   <axis xyz="0 1 0" rpy="0 0 0"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
 </joint>
 
 <joint name="l_b_h_motor_joint"  type="fixed">
   <origin xyz="-0.016 0.165 0.088" rpy="0 0 0" />
   <parent link="l_b_hip"/>
   <child link="l_b_h_motor"/>
+<<<<<<< HEAD
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+=======
   <axis xyz="0 1 0" rpy="0 0 0"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
 </joint>
 
 <joint name="r_b_h_motor_joint"  type="fixed">
   <origin xyz="-0.010 -0.165 0.088" rpy="0 0 0" />
   <parent link="r_b_hip"/>
   <child link="r_b_h_motor"/>
+<<<<<<< HEAD
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+</joint>
+
+<joint name="l_f_leg_joint"  type="revolute">
+  <origin xyz="-0.006 0.07 -0.077" rpy="0 0 0" />
+  <parent link="l_f_h_motor"/>
+  <child link="l_f_leg"/>
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+  <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+=======
   <axis xyz="0 1 0" rpy="0 0 0"/>
 </joint>
 
@@ -452,28 +667,42 @@
   <parent link="l_f_h_motor"/>
   <child link="l_f_leg"/>
   <axis xyz="0 1 0" rpy="0 0 0"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
 </joint>
 
 <joint name="l_b_leg_joint"  type="fixed">
   <origin xyz="-0.006 0.07 -0.077" rpy="0 0 0" />
   <parent link="l_b_h_motor"/>
   <child link="l_b_leg"/>
+<<<<<<< HEAD
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+=======
   <axis xyz="0 1 0" rpy="0 0 0"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
 </joint>
 
 <joint name="r_f_leg_joint"  type="fixed">
   <origin xyz="-0.006 -0.07 -0.077" rpy="0 0 0" />
   <parent link="r_f_h_motor"/>
   <child link="r_f_leg"/>
+<<<<<<< HEAD
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+=======
   <axis xyz="0 1 0" rpy="0 0 0"/>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
 </joint>
 
 <joint name="r_b_leg_joint"  type="fixed">
   <origin xyz="-0.006 -0.07 -0.077" rpy="0 0 0" />
   <parent link="r_b_h_motor"/>
   <child link="r_b_leg"/>
+<<<<<<< HEAD
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+</joint-->
+=======
   <axis xyz="0 1 0" rpy="0 0 0"/>
 </joint>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
 <!--######################################################################################################################################-->
 
 
@@ -578,7 +807,7 @@
 
 <!--#######################################################################################################################################-->
 <!--contact_sensor_torso_base-->
-<gazebo reference="torso_base">
+<!--gazebo reference="torso_base">
   <sensor name="contact_sensor" type="contact">
     <always_on>true</always_on>
     <update_rate>15.0</update_rate>
@@ -590,10 +819,10 @@
       <frameName>torso_base</frameName>
     </plugin>
   </sensor>
-</gazebo>
+</gazebo-->
 
 <!--front_left_leg_contact contact_sensor-->
-<gazebo reference="l_f_leg">
+<!--gazebo reference="l_f_leg">
   <sensor name="contact_sensor_1" type="contact">
     <always_on>true</always_on>
     <update_rate>15.0</update_rate>
@@ -605,9 +834,9 @@
       <frameName>l_f_leg</frameName>
     </plugin>
   </sensor>
-</gazebo>
+</gazebo-->
 <!--back_left_leg_contact contact_sensor-->
-<gazebo reference="l_b_leg">
+<!--gazebo reference="l_b_leg">
   <sensor name="contact_sensor_2" type="contact">
     <always_on>true</always_on>
     <update_rate>15.0</update_rate>
@@ -619,9 +848,9 @@
       <frameName>l_b_leg</frameName>
     </plugin>
   </sensor>
-</gazebo>
+</gazebo-->
 <!--frot right_leg_contact contact_sensor-->
-<gazebo reference="r_f_leg">
+<!--gazebo reference="r_f_leg">
   <sensor name="contact_sensor_3" type="contact">
     <always_on>true</always_on>
     <update_rate>15.0</update_rate>
@@ -633,9 +862,9 @@
       <frameName>r_f_leg</frameName>
     </plugin>
   </sensor>
-</gazebo>
+</gazebo-->
 <!--back right_leg_contact contact_sensor-->
-<gazebo reference="r_b_leg">
+<!--gazebo reference="r_b_leg">
   <sensor name="contact_sensor_4" type="contact">
     <always_on>true</always_on>
     <update_rate>15.0</update_rate>
@@ -647,7 +876,7 @@
       <frameName>r_b_leg</frameName>
     </plugin>
   </sensor>
-</gazebo>
+</gazebo-->
 
 
 
@@ -685,15 +914,26 @@
                 <max>5.0</max>
                 <resolution>0.01</resolution>
             </range>
+<<<<<<< HEAD
+            <noise>
+                <type>gaussian</type-->
+=======
             <noise-->
                 <!--type>gaussian</type-->
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
                 <!-- Noise parameters based on published spec for Hokuyo laser
                     achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
                     stddev of 0.01m will put 99.7% of samples within 0.03m of the true
                     reading. -->
+<<<<<<< HEAD
+                <!--mean>0.0</mean>
+                <stddev>0.01</stddev>
+            </noise>
+=======
                 <!--mean>0.0</mean-->
                 <!--stddev>0.01</stddev-->
             <!--/noise>
+>>>>>>> 91e1ca3aa603a8a23207d7aa177f3fa7cca5ff34
         </ray>
         <plugin name="laser" filename="libgazebo_ros_laser.so">
             <topicName>/scan</topicName>
