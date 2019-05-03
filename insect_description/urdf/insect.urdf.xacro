@@ -323,7 +323,7 @@
                                       <visual>
                                           <origin xyz="0 0 0" rpy="0 0 0"/>
                                           <geometry>
-                                              
+
                                               <mesh filename="package://insect_description/meshes/hokuyo.dae"/>
                                           </geometry>
                                       </visual>
@@ -337,8 +337,8 @@
 
 <!--#########################################################################################################################################-->
 <!-- Joint properties -->
-<xacro:property name="joint_lower_limit" value="-${3.14}"/>
-<xacro:property name="joint_upper_limit" value="${3.14}"/>
+<xacro:property name="joint_lower_limit" value="-${pi/4}"/>
+<xacro:property name="joint_upper_limit" value="${pi/4}"/>
 <xacro:property name="joint_effort" value="6.0"/>
 <xacro:property name="joint_velocity" value="0.524"/>
 <xacro:property name="pi" value="3.1415926535897931"/>
@@ -397,7 +397,9 @@
   <origin xyz=" -0.04 -0.00005 -0.054" rpy="0 0 0" />
   <parent link="l_f_motor"/>
   <child link="l_f_hip"/>
+  <dynamics damping="0.1" friction="0"/>
   <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+  <safety_controller k_position="100" k_velocity="100" soft_lower_limit="-10.5236" soft_upper_limit="10.5236"/>
   <axis xyz="0 0 1"/>
 </joint>
 
@@ -405,7 +407,9 @@
   <origin xyz="-0.04 0.00005 -0.054" rpy="0 0 0" />
   <parent link="r_f_motor"/>
   <child link="r_f_hip"/>
+  <dynamics damping="0.1" friction="0"/>
   <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+  <safety_controller k_position="100" k_velocity="100" soft_lower_limit="-10.5236" soft_upper_limit="10.5236"/>
   <axis xyz="0 0 1" rpy="0 0 0"/>
 </joint>
 
@@ -413,15 +417,19 @@
   <origin xyz="-0.04 0.003 -0.054" rpy="0 0 0" />
   <parent link="l_b_motor"/>
   <child link="l_b_hip"/>
+  <dynamics damping="0.1" friction="0"/>
   <axis xyz="0 0 1" rpy="0 0 0"/>
   <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+  <safety_controller k_position="100" k_velocity="100" soft_lower_limit="-10.5236" soft_upper_limit="10.5236"/>
 </joint>
 
  <joint name="r_b_hip_joint"  type="revolute">
   <origin xyz="-0.04 0.003 -0.054" rpy="0 0 0" />
   <parent link="r_b_motor"/>
   <child link="r_b_hip"/>
+  <dynamics damping="0.1" friction="0"/>
   <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+  <safety_controller k_position="100" k_velocity="100" soft_lower_limit="-10.5236" soft_upper_limit="10.5236"/>
   <axis xyz="0 0 1" rpy="0 0 0"/>
 </joint>
 
@@ -457,32 +465,40 @@
   <origin xyz="0.075 -0.0002 -0.077" rpy="0 0 ${pi}" />
   <parent link="l_f_h_motor"/>
   <child link="l_f_leg"/>
+  <dynamics damping="0.1" friction="0"/>
   <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
-  <axis xyz="0 0 1" rpy="0 0 0"/>
+  <safety_controller k_position="100" k_velocity="100" soft_lower_limit="-10.5236" soft_upper_limit="10.5236"/>
+  <axis xyz="0 1 0" rpy="0 0 0"/>
 </joint>
 
 <joint name="l_b_leg_joint"  type="revolute">
   <origin xyz="0.075 0.0002 -0.077" rpy="0 0 ${pi}" />
   <parent link="l_b_h_motor"/>
   <child link="l_b_leg"/>
+  <dynamics damping="0.1" friction="0"/>
   <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
-  <axis xyz="0 0 1" rpy="0 0 0"/>
+  <safety_controller k_position="100" k_velocity="100" soft_lower_limit="-10.5236" soft_upper_limit="10.5236"/>
+  <axis xyz="0 1 0" rpy="0 0 0"/>
 </joint>
 
 <joint name="r_f_leg_joint"  type="revolute">
   <origin xyz="0.075 -0.0002 -0.077" rpy="0 0 ${pi}" />
   <parent link="r_f_h_motor"/>
   <child link="r_f_leg"/>
+  <dynamics damping="0.1" friction="0"/>
   <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
-  <axis xyz="0 0 1" rpy="0 0 0"/>
+  <safety_controller k_position="100" k_velocity="100" soft_lower_limit="-10.5236" soft_upper_limit="10.5236"/>
+  <axis xyz="0 1 0" rpy="0 0 0"/>
 </joint>
 
 <joint name="r_b_leg_joint"  type="revolute">
   <origin xyz="0.075 0.0002 -0.077" rpy="0 0 ${pi}" />
   <parent link="r_b_h_motor"/>
   <child link="r_b_leg"/>
+  <dynamics damping="0.1" friction="0"/>
   <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
-  <axis xyz="0 0 1" rpy="0 0 0"/>
+  <safety_controller k_position="100" k_velocity="100" soft_lower_limit="-10.5236" soft_upper_limit="10.5236"/>
+  <axis xyz="0 1 0" rpy="0 0 0"/>
 </joint>
 <!--######################################################################################################################################-->
 
@@ -525,7 +541,7 @@
 
 
 
-  <transmission name="r_b_motor">
+  <transmission name="r_b_motor_transmission">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="r_b_motor_joint">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
