@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+  <name>insect_1_description</name>
+  <version>0.1.0</version>
+  <description>Describes insect robot model for Gazebo</description>
+
+  <maintainer email="veerkalburgi@gmail.com">Veer Kalburgi</maintainer>
+
+
+  <license>BSD</license>
+
+
+  <url type="website">http://wiki.ros.org/insect_1_description</url>
+
+
+  <author email="veerkalburgi@gmail.com">Veer Kalburgi</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+  </export>
+</package>

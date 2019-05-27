@@ -1,0 +1,47 @@
+insect:
+     # Publish all joint states -----------------------------------
+
+    joint_state_controller:
+        type: joint_state_controller/JointStateController
+        publish_rate: 50
+
+     # Position Controllers ---------------------------------------
+    l_f_hip_joint_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: l_f_hip_joint
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    r_f_hip_joint_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: r_f_hip_joint
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    l_b_hip_joint_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: l_b_hip_joint
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    r_b_hip_joint_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: r_b_hip_joint
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    l_f_leg_joint_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: l_f_leg_joint
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    r_f_leg_joint_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: r_f_leg_joint
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    l_b_leg_joint_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: l_b_leg_joint
+        pid: {p: 100.0, i: 0.01, d: 10.0}
+
+    r_b_leg_joint_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: r_b_leg_joint
+        pid: {p: 100.0, i: 0.01, d: 10.0}

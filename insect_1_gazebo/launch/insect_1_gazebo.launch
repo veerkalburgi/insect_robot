@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="paused" default="false"/>
+  <arg name="move_base"    default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <!--#######################################################################################################-->
+<include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="worlds/empty.world"/>
+    <arg name="paused" value="true"/>
+  </include>
+<!--##################################################################################################-->
+   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find insect_1_description)/urdf/insect.urdf.xacro " />
+   <param name="use_gui" value="True"/>
+   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen"  args="-param robot_description -urdf -model insect"/>
+   <node name="insect_walker" pkg="insect_1_gazebo" type="walker.py" />
+   <include file="$(find insect_1_control)/launch/insect_1_control.launch"/>
+   <!--include file="$(find insect_1_gazebo)/launch/display.launch"/-->
+</launch>
