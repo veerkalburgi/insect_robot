@@ -2,9 +2,6 @@
 <robot name="insect" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <!--###############################################################################-->
-
-
-
 <!-- Joint properties -->
 <xacro:property name="pi" value="3.1415926535897931"/>
 <xacro:property name="joint_lower_limit" value="-${pi/12}"/>
@@ -22,14 +19,14 @@
    </inertial>
  </xacro:macro>
  <!--#####################################################################################-->
-<!--link name= "world"/>
+<link name= "world"/>
 <joint name="world_joint" type="fixed">
-  <origin xyz="0.155823674040498 -0.197142204072068 0.168908258984982 " rpy="0 0 0" />
+  <origin xyz="0.225625426875454 -0.0726422157817547  0.05" rpy="0 0 0" />
   <origin xyz="0 0 0" rpy="0 0 0" />
   <parent link="world" />
   <child link="torso_base" />
   <axis xyz="1 0 0" />
-</joint-->
+</joint>
 <!--################################################################################################-->
   <!--IMU sensor_link-->
    <link name="imu_link">
@@ -114,7 +111,7 @@
    </link>
 
    <joint name="hokuyo_joint" type="fixed">
-       <origin xyz="0.155 -0.10 0.28" rpy="0 0 ${pi/2  }"/>
+       <origin xyz="0.155 -0.18 0.28" rpy="0 0 ${pi/2  }"/>
        <parent link="torso_base"/>
        <child link="hokuyo_link"/>
        <axis xyz="0 0 1"/>
@@ -122,20 +119,7 @@
 <!--#######################################################################################################-->
 
 <link name="torso_base">
-  <inertial>
-    <origin
-      xyz="0.155823674040498 -0.197142204072068 0.168908258984982"
-      rpy="0 0 0" />
-    <mass
-      value="1.09435213027821" />
-    <inertia
-      ixx="1.0"
-      ixy="0"
-      ixz="0"
-      iyy="1.0"
-      iyz="0"
-      izz="1.0" />
-  </inertial>
+  <xacro:default_inertial mass="1.09435213027821"/>
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0" />
     <geometry>

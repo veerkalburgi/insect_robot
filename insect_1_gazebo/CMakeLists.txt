@@ -23,3 +23,10 @@ catkin_package(
   DEPENDS
     gazebo
 )
+#include_directories(
+##   include
+#  ${catkin_INCLUDE_DIRS}
+#)
+
+#add_executable(parser src/parser.cpp)
+#target_link_libraries(parser ${catkin_LIBRARIES})

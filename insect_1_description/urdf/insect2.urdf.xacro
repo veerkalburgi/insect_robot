@@ -2,7 +2,12 @@
 <robot name="insect" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <!--###############################################################################-->
-
+<xacro:property name="hip_len" value="0.148" />
+<xacro:property name="limb_len" value="0.219" />
+<xacro:property name="torso_len" value="0.05" />
+<xacro:property name="torso_width" value="0.05" />
+<xacro:property name="torso_hight" value="0.05" />
+<!--##################################################################################-->
 
 
 <!-- Joint properties -->

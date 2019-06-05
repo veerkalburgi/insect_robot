@@ -7,7 +7,7 @@ from insect_1_gazebo.insect import Insect_bot
 from geometry_msgs.msg import Twist
 
 
-jleg = ['hip_joint', 'leg_joint']
+jleg = ['hip_joint', 'limb_joint']
 suffix = ['f', 'b']
 sides = ['l', 'r']
 joints = []
@@ -89,8 +89,8 @@ class WFunc:
         zero = WJFunc()
         zero.scale = 0
 
-        self.set_func('leg_joint', f1, f2)
-        #self.set_func('leg_joint', f3, f4)
+        self.set_func('limb_joint', f1, f2)
+        #self.set_func('limb_joint', f3, f4)
         self.set_func('hip_joint', zero, zero)
 
         self.show()
@@ -154,15 +154,15 @@ class WFunc:
             v = velocity[1]*self.parameters["vy_scale"]
             d=(x)*v
             if phase:
-                angles['l_f_leg_joint'] += d
-                angles['l_b_leg_joint'] += d
-                angles['r_f_leg_joint'] += d
-                angles['r_b_leg_joint'] += d
+                angles['l_f_limb_joint'] += d
+                angles['l_b_limb_joint'] += d
+                angles['r_f_limb_joint'] += d
+                angles['r_b_limb_joint'] += d
             else:
-                angles['l_f_leg_joint'] -= d
-                angles['l_b_leg_joint'] -= d
-                angles['r_f_leg_joint'] -= d
-                angles['r_b_leg_joint'] -= d
+                angles['l_f_limb_joint'] -= d
+                angles['l_b_limb_joint'] -= d
+                angles['r_f_limb_joint'] -= d
+                angles['r_b_limb_joint'] -= d
 
 
             #     if phase:

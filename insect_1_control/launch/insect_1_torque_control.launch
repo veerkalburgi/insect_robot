@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <launch>
+    <arg name="paused" default="false"/>
+    <arg name="move_base"    default="false"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="gui" default="true"/>
+    <arg name="headless" default="false"/>
+    <arg name="debug" default="false"/>
+    <!--#######################################################################################################-->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="world_name" value="worlds/empty_sky.world"/>
+      <arg name="paused" value="true"/>
+    </include>
+  <!--##################################################################################################-->
+     <param name="robot_description" command="$(find xacro)/xacro --inorder $(find insect_1_description)/urdf/insect.urdf.xacro " />
+     <param name="use_gui" value="True"/>
+     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen"  args="-param robot_description -urdf -model insect"/>
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find insect_1_control)/config/insect_rbot_torque_control.yaml" command="load"/>
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+	output="screen" ns="/insect" args="
+					  l_f_hip_joint_torque_controller
+					  r_f_hip_joint_torque_controller
+					  l_b_hip_joint_torque_controller
+            r_b_hip_joint_torque_controller
+            l_f_limb_joint_torque_controller
+            r_f_limb_joint_torque_controller
+            l_b_limb_joint_torque_controller
+            r_b_limb_joint_torque_controller
+            "/>
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+	respawn="false" output="screen">
+    <remap from="/joint_states" to="/insect/joint_states" />
+  </node>
+
+</launch>

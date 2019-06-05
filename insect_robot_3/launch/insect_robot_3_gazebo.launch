@@ -12,10 +12,10 @@
     <arg name="paused" value="true"/>
   </include>
 <!--##################################################################################################-->
-   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find insect_1_description)/urdf/insect.urdf.xacro " />
+   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find insect_robot_3)/urdf/insect2.urdf.xacro " />
    <param name="use_gui" value="True"/>
    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen"  args="-param robot_description -urdf -model insect"/>
    <node name="insect_walker" pkg="insect_1_gazebo" type="walker.py" />
-   <include file="$(find insect_1_control)/launch/insect_1_control.launch"/>
+   <include file="$(find insect_robot_3)/launch/insect_robot_3_control.launch"/>
    <!--include file="$(find insect_1_gazebo)/launch/display.launch"/-->
 </launch>
