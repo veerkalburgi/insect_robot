@@ -1,4 +1,4 @@
-  #include <iostream>
+#include <iostream>
 #include <vector>
 #include <string>
 
@@ -35,11 +35,11 @@ int main(int argc, char** argv)
     odom_trans.child_frame_id = "torso_base";
 
     // initialize four legs
-    LegIK leg_lf("lf");
-    LegIK leg_rf("rf");
-    LegIK leg_lb("lb");
-    LegIK leg_rb("rb");
-    std::vector<LegIK> legs{leg_lf, leg_rf, leg_lb, leg_rb};
+    LegIK leg_l_f("l_f");
+    LegIK leg_r_f("r_f");
+    LegIK leg_l_b("l_b");
+    LegIK leg_r_b("r_b");
+    std::vector<LegIK> legs{leg_l_f, leg_r_f, leg_l_b, leg_r_b};
 
     std::vector<std::vector<double>> end_pose(4, std::vector<double>(2, 0.0)); // 4 chain, end pose has 6dof
     std::vector<std::vector<double>> result(4, std::vector<double>(2, 0.0)); // 4 legs, every leg has 5 joints
@@ -110,10 +110,10 @@ int main(int argc, char** argv)
         {
             z_trans_shoe -= STEP_L;
         }
-        ROS_INFO("x_trans_total: %lf", x_trans_total);
-        ROS_INFO("x_trans: %lf", x_trans);
-        ROS_INFO("x_trans_shoe: %lf", x_trans_shoe);
-        ROS_INFO("z_trans_shoe: %lf", z_trans_shoe);
+        ROS_INFO("x_trans_total: %l_f", x_trans_total);
+        ROS_INFO("x_trans: %l_f", x_trans);
+        ROS_INFO("x_trans_shoe: %l_f", x_trans_shoe);
+        ROS_INFO("z_trans_shoe: %l_f", z_trans_shoe);
 
         for(int i = 0; i < 4; i ++)
         {

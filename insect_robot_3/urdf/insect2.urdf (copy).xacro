@@ -27,14 +27,14 @@
    </inertial>
  </xacro:macro>
  <!--#####################################################################################-->
-<!--link name= "world"/>
+<link name= "world"/>
 <joint name="world_joint" type="fixed">
   <origin xyz="0.155823674040498 -0.197142204072068 0.168908258984982 " rpy="0 0 0" />
   <origin xyz="0 0 0" rpy="0 0 0" />
   <parent link="world" />
-  <child link="torso_base"/>
-  <axis xyz="1 0 0"/>
-</joint-->
+  <child link="torso_base" />
+  <axis xyz="1 0 0" />
+</joint>
 <!--################################################################################################-->
   <!--IMU sensor_link-->
    <link name="imu_link">
@@ -127,8 +127,7 @@
 <!--#######################################################################################################-->
 
 <link name="torso_base">
-  <xacro:default_inertial mass="0.0280618431111951"/>
-  <!--inertial>
+  <inertial>
     <origin
       xyz="0.155823674040498 -0.197142204072068 0.168908258984982"
       rpy="0 0 0" />
@@ -141,7 +140,7 @@
       iyy="1.0"
       iyz="0"
       izz="1.0" />
-  </inertial-->
+  </inertial>
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0" />
     <geometry>

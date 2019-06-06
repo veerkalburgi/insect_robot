@@ -8,6 +8,7 @@ Panels:
         - /Status1
         - /LaserScan1
         - /Camera1
+        - /TF1
       Splitter Ratio: 0.5
     Tree Height: 251
   - Class: rviz/Selection
@@ -172,8 +173,68 @@ Visualization Manager:
         Grid: true
         LaserScan: true
         RobotModel: true
+        TF: true
         Value: true
       Zoom Factor: 1
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        camera_link:
+          Value: true
+        hokuyo_link:
+          Value: true
+        imu_link:
+          Value: true
+        l_b_hip:
+          Value: true
+        l_b_limb:
+          Value: true
+        l_f_hip:
+          Value: true
+        l_f_limb:
+          Value: true
+        odom:
+          Value: true
+        r_b_hip:
+          Value: true
+        r_b_limb:
+          Value: true
+        r_f_hip:
+          Value: true
+        r_f_limb:
+          Value: true
+        torso_base:
+          Value: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        odom:
+          torso_base:
+            camera_link:
+              {}
+            hokuyo_link:
+              {}
+            imu_link:
+              {}
+            l_b_hip:
+              l_b_limb:
+                {}
+            l_f_hip:
+              l_f_limb:
+                {}
+            r_b_hip:
+              r_b_limb:
+                {}
+            r_f_hip:
+              r_f_limb:
+                {}
+      Update Interval: 0
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -199,16 +260,16 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 2.45080876
+      Distance: 0.868703246
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.428832799
-        Y: 0.185882419
-        Z: -0.434669286
+        X: 0.0761804357
+        Y: -0.0527724661
+        Z: -0.0165517405
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false

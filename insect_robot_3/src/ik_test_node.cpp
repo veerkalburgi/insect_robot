@@ -32,23 +32,23 @@ int main(int argc, char** argv)
     std::vector<std::string> joint_name = {"l_f_hip_joint", "l_f_limb_joint",
                                            "r_f_hip_joint", "r_f_limb_joint",
                                            "l_b_hip_joint", "l_b_limb_joint",
-                                           "r_b_hip_joint", "r_b_limb_jont" };
-    std::vector<double> joint_pos = {0, -PI/3.0,
-                                     0, -PI/3.0,
-                                     0, -PI/3.0,
-                                     0, -PI/3.0};
+                                           "r_b_hip_joint", "r_b_limb_joint" };
+    std::vector<double> joint_pos = {0, -PI/15.0,
+                                     0, -PI/15.0,
+                                     0, -PI/15.0,
+                                     0, -PI/15.0};
     // for joints pos pub
     sensor_msgs::JointState joint_state;
     // for odom pub
     geometry_msgs::TransformStamped odom_trans;
     odom_trans.header.frame_id = "odom";
-    odom_trans.child_frame_id = "torso_link";
+    odom_trans.child_frame_id = "torso_base";
 
     // ik stuff initialization
     std::string urdf_param = "/robot_description";
     double timeout = 0.005;
     double eps = 1e-5;
-    std::string chain_start = "l_f_hip";
+    std::string chain_start ="torso_base";
     std::string chain_end = "l_f_limb";
     TRAC_IK::TRAC_IK tracik_solver(chain_start, chain_end, urdf_param, timeout, eps);
     KDL::Chain chain;
@@ -77,7 +77,7 @@ int main(int argc, char** argv)
     KDL::JntArray result;
 
     bool flag = true;
-    double x_trans = 0;
+        double x_trans = 0;
 
     auto print_frame_lambda = [](KDL::Frame f)
     {
@@ -109,9 +109,9 @@ int main(int argc, char** argv)
         // update joint_state
         ROS_INFO("update joint state");
         joint_state.header.stamp = ros::Time::now();
-        joint_state.name.resize(16);
-        joint_state.position.resize(16);
-        for(size_t i = 0; i < 16; i ++)
+        joint_state.name.resize(8);
+        joint_state.position.resize(8);
+        for(size_t i = 0; i < 8; i ++)
         {
             joint_state.name[i] = joint_name[i];
             joint_state.position[i] = joint_pos[i];
@@ -123,7 +123,7 @@ int main(int argc, char** argv)
         ROS_INFO("update odom trans");
         odom_trans.header.stamp = ros::Time::now();
         odom_trans.transform.translation.x = x_trans;
-        odom_trans.transform.translation.y = 0;
+        odom_trans.transform.translation.y = 0; //0.0866
         odom_trans.transform.translation.z = 0.0866;
         odom_trans.transform.rotation = tf::createQuaternionMsgFromYaw(0.0);
 
