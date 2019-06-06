@@ -29,14 +29,14 @@ int main(int argc, char** argv)
         ROS_ERROR("Failed to construct kdl tree");
     }
 
-    std::vector<std::string> joint_name = {"l_f_hip_joint", "l_f_limb_joint",
-                                           "r_f_hip_joint", "r_f_limb_joint",
-                                           "l_b_hip_joint", "l_b_limb_joint",
-                                           "r_b_hip_joint", "r_b_limb_joint" };
-    std::vector<double> joint_pos = {0, -PI/15.0,
-                                     0, -PI/15.0,
-                                     0, -PI/15.0,
-                                     0, -PI/15.0};
+    std::vector<std::string> joint_name = {"l_f_hip_joint", "l_f_limb_joint", "l_f_feet_joint",
+                                           "r_f_hip_joint", "r_f_limb_joint", "r_f_feet_joint",
+                                           "l_b_hip_joint", "l_b_limb_joint", "l_b_feet_joint",
+                                           "r_b_hip_joint", "r_b_limb_joint", "r_b_feet_joint"};
+    std::vector<double> joint_pos = {PI/15, -PI/15.0, 0,
+                                    PI/15, -PI/15.0,  0,
+                                     PI/15, -PI/15.0, 0,
+                                     PI/15, -PI/15.0, 0};
     // for joints pos pub
     sensor_msgs::JointState joint_state;
     // for odom pub
@@ -48,8 +48,8 @@ int main(int argc, char** argv)
     std::string urdf_param = "/robot_description";
     double timeout = 0.005;
     double eps = 1e-5;
-    std::string chain_start ="torso_base";
-    std::string chain_end = "l_f_limb";
+    std::string chain_start ="l_f_hip";
+    std::string chain_end = "l_f_feet";
     TRAC_IK::TRAC_IK tracik_solver(chain_start, chain_end, urdf_param, timeout, eps);
     KDL::Chain chain;
     KDL::JntArray ll, ul; //joint lower limits, joint upper limits
@@ -77,7 +77,7 @@ int main(int argc, char** argv)
     KDL::JntArray result;
 
     bool flag = true;
-        double x_trans = 0;
+        double y_trans = 0;
 
     auto print_frame_lambda = [](KDL::Frame f)
     {
@@ -109,9 +109,9 @@ int main(int argc, char** argv)
         // update joint_state
         ROS_INFO("update joint state");
         joint_state.header.stamp = ros::Time::now();
-        joint_state.name.resize(8);
-        joint_state.position.resize(8);
-        for(size_t i = 0; i < 8; i ++)
+        joint_state.name.resize(12);
+        joint_state.position.resize(12);
+        for(size_t i = 0; i < 12; i ++)
         {
             joint_state.name[i] = joint_name[i];
             joint_state.position[i] = joint_pos[i];
@@ -122,8 +122,8 @@ int main(int argc, char** argv)
         // update odom transform
         ROS_INFO("update odom trans");
         odom_trans.header.stamp = ros::Time::now();
-        odom_trans.transform.translation.x = x_trans;
-        odom_trans.transform.translation.y = 0; //0.0866
+        odom_trans.transform.translation.x =0;
+        odom_trans.transform.translation.y = y_trans; //0.0866
         odom_trans.transform.translation.z = 0.0866;
         odom_trans.transform.rotation = tf::createQuaternionMsgFromYaw(0.0);
 
@@ -132,7 +132,7 @@ int main(int argc, char** argv)
         ROS_INFO("pub odom trans");
         broadcaster.sendTransform(odom_trans);
 
-        x_trans += 0.001;
+        y_trans += 0.009;
 
         loop_rate.sleep();
     }

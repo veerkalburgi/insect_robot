@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include <vector> 
+#include <vector>
 
 #include "kdl_parser/kdl_parser.hpp"
 #include "kdl/chainiksolverpos_nr_jl.hpp"
@@ -15,8 +15,8 @@ namespace insect{
 const double PI = 3.14159;
 const double HIP_L = 0.148;
 const double LIMB_L = 0.219;
-const double HBDY_L = 0.3;
-const int JNTS_NUM = 10;
+const double HBDY_L = 0.2;
+const int JNTS_NUM = 12;
 enum leg_type {L_F, R_F, L_B, R_B};
 
 class LegIK{

@@ -22,10 +22,10 @@ int main(int argc, char** argv)
     std::string robot_desc_string;
     n.param("robot_description", robot_desc_string, std::string());
 
-    std::vector<std::string> joint_name = {"l_f_hip_joint", "l_f_limb_joint",
-                                           "r_f_hip_joint", "r_f_limb_joint",
-                                           "l_b_hip_joint", "l_b_limb_joint",
-                                           "r_b_hip_joint", "r_b_limb_joint"};
+    std::vector<std::string> joint_name = {"l_f_hip_joint", "l_f_limb_joint", "l_f_feet_joint",
+                                           "r_f_hip_joint", "r_f_limb_joint", "r_f_feet_joint",
+                                           "l_b_hip_joint", "l_b_limb_joint", "l_b_feet_joint",
+                                           "r_b_hip_joint", "r_b_limb_joint", "r_b_feet_joint"};
 
     // for joints pos pub
     sensor_msgs::JointState joint_state;
@@ -41,8 +41,8 @@ int main(int argc, char** argv)
     LegIK leg_r_b("r_b");
     std::vector<LegIK> legs{leg_l_f, leg_r_f, leg_l_b, leg_r_b};
 
-    std::vector<std::vector<double>> end_pose(4, std::vector<double>(2, 0.0)); // 4 chain, end pose has 6dof
-    std::vector<std::vector<double>> result(4, std::vector<double>(2, 0.0)); // 4 legs, every leg has 5 joints
+    std::vector<std::vector<double>> end_pose(4, std::vector<double>(6, 0.0)); // 4 chain, end pose has 6dof
+    std::vector<std::vector<double>> result(4, std::vector<double>(3, 0.0)); // 4 legs, every leg has 5 joints
 
     bool first = true;
     int flag = -1;
@@ -55,10 +55,10 @@ int main(int argc, char** argv)
     double x_trans = 0;
     double y_trans = 0;
     double z_trans = 0;
-    // for shoe_link pose
-    double x_trans_shoe = 0;
-    double y_trans_shoe = 0;
-    double z_trans_shoe = 0;
+    // for limb_link pose
+    double x_trans_feet = 0;
+    double y_trans_feet = 0;
+    double z_trans_feet = 0;
 
     double error = 0.00001;
     while(ros::ok())
@@ -68,7 +68,7 @@ int main(int argc, char** argv)
         x_trans_total = cycle_trans + cycle_cnt * CYCLE_L;
         if(!first)
         {
-            x_trans_shoe += STEP_L;
+            x_trans_feet += STEP_L;
         }
         if(cycle_trans > CYCLE_L)
         {
@@ -78,8 +78,8 @@ int main(int argc, char** argv)
         if(x_trans > 2*CYCLE_L )
         {
             x_trans = 0.0;
-            x_trans_shoe = -2*CYCLE_L;
-            z_trans_shoe = 0.0;
+            x_trans_feet = -2*CYCLE_L;
+            z_trans_feet = 0.0;
             first = false;
         }
 
@@ -104,22 +104,22 @@ int main(int argc, char** argv)
         // set end pose
         if(cycle_cnt%4 == 0 || cycle_cnt%4 == 2)
         {
-            z_trans_shoe += STEP_L;
+            z_trans_feet += STEP_L;
         }
         else
         {
-            z_trans_shoe -= STEP_L;
+            z_trans_feet -= STEP_L;
         }
-        ROS_INFO("x_trans_total: %l_f", x_trans_total);
-        ROS_INFO("x_trans: %l_f", x_trans);
-        ROS_INFO("x_trans_shoe: %l_f", x_trans_shoe);
-        ROS_INFO("z_trans_shoe: %l_f", z_trans_shoe);
+        ROS_INFO("x_trans_total: %lf", x_trans_total);
+        ROS_INFO("x_trans: %lf", x_trans);
+        ROS_INFO("x_trans_feet: %lf", x_trans_feet);
+        ROS_INFO("z_trans_feet: %lf", z_trans_feet);
 
         for(int i = 0; i < 4; i ++)
         {
             if(legs[i].Up2Down())
             {
-                std::vector<double> pose{x_trans_shoe, y_trans_shoe, z_trans_shoe, 0, 0, 0}; // x y z r y p
+                std::vector<double> pose{x_trans_feet, y_trans_feet, z_trans_feet, 0, 0, 0}; // x y z r y p
                 end_pose[i] = pose;
             }
             else
@@ -152,7 +152,7 @@ int main(int argc, char** argv)
         std::vector<double> new_pos;
         for(int i = 0; i < 4; i ++)
         {
-            for(int j = 0; j < 5; j ++)
+            for(int j = 0; j < 3; j ++)
             {
                 new_pos.push_back(result[i][j]);
             }

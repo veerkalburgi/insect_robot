@@ -13,8 +13,8 @@
 const double PI = 3.14159;
 const double HIP_L = 0.148;
 const double LIMB_L = 0.219;
-const double HBDY_L = 0.3;
-const int JNTS_NUM = 8;
+const double HBDY_L = 0.2;
+const int JNTS_NUM = 12;
 enum leg_type {L_F, R_F, L_B, R_B};
 
 class LegIK{
@@ -77,7 +77,7 @@ void LegIK::init()
 
     // base to shoe
     chain_start_ = "torso_base";
-    chain_end_ = name_ + "_limb";
+    chain_end_ = name_ + "_feet";
     tracik_solver_ptr_ = new TRAC_IK::TRAC_IK(chain_start_, chain_end_, urdf_param_, timeout_, eps_);
     bool valid = tracik_solver_ptr_->getKDLChain(chain_);
     if(!valid)
@@ -91,26 +91,26 @@ void LegIK::init()
     }
     fk_solver_ptr_ = new KDL::ChainFkSolverPos_recursive(chain_);
     jnt_array_ = KDL::JntArray(chain_.getNrOfJoints());
-    std::vector<std::vector<double>> base2shoe {{HBDY_L, HIP_L, -LIMB_L, 0, 0, 0},
-                                                {HBDY_L, -HIP_L, -LIMB_L, 0, 0, 0},
-                                                {-HBDY_L, HIP_L, -LIMB_L, 0, 0, 0},
-                                                {-HBDY_L, -HIP_L, -LIMB_L, 0, 0, 0}};
-    jnt_array_(0) = 0; // shoulder joint
-    //jnt_array_(1) = -PI/3.0;
-    //jnt_array_(2) = -PI/3.0;
-    jnt_array_(1) = PI/15; //
+      std::vector<std::vector<double>> torso2feet {{HBDY_L, HIP_L, -LIMB_L, 0, 0, 0},
+                                                  {HBDY_L, -HIP_L, -LIMB_L, 0, 0, 0},
+                                                  {-HBDY_L, HIP_L, -LIMB_L, 0, 0, 0},
+                                                  {-HBDY_L, -HIP_L, -LIMB_L, 0, 0, 0}};
+      jnt_array_(0) = 0; // shoulder joint
+    jnt_array_(1) = -PI/15.0;
+    jnt_array_(2) = 0;
+    //jnt_array_(1) = PI/15; //
     //jnt_array_(4) = 0; // shoe joint
     switch(legt_)
     {
-        case L_F: start2end_ = base2shoe[0]; break;
-        case R_F: start2end_ = base2shoe[1]; break;
-        case L_B: start2end_ = base2shoe[2]; break;
-        case R_B: start2end_ = base2shoe[3]; break;
+        case L_F: start2end_ = torso2feet[0]; break;
+        case R_F: start2end_ = torso2feet[1]; break;
+        case L_B: start2end_ = torso2feet[2]; break;
+        case R_B: start2end_ = torso2feet[3]; break;
     }
 
 
     // shoe to base
-    inv_chain_start_ = name_+"_limb";
+    inv_chain_start_ = name_+"_feet";
     inv_chain_end_ = "torso_base";
     inv_tracik_solver_ptr_ = new TRAC_IK::TRAC_IK(inv_chain_start_, inv_chain_end_, urdf_param_, timeout_, eps_);
     valid = inv_tracik_solver_ptr_->getKDLChain(inv_chain_);
@@ -125,21 +125,21 @@ void LegIK::init()
     }
     inv_fk_solver_ptr_ = new KDL::ChainFkSolverPos_recursive(chain_);
     inv_jnt_array_ = KDL::JntArray(chain_.getNrOfJoints());
-    std::vector<std::vector<double>> shoe2base {{-HBDY_L, -HIP_L, LIMB_L, 0, 0, 0},
+    std::vector<std::vector<double>> feet2torso {{-HBDY_L, -HIP_L, LIMB_L, 0, 0, 0},
                                                 {-HBDY_L, HIP_L, LIMB_L, 0, 0, 0},
                                                 {HBDY_L, -HIP_L, LIMB_L, 0, 0, 0},
                                                 {HBDY_L, HIP_L, LIMB_L, 0, 0, 0}};
     inv_jnt_array_(0) = 0;
-    //inv_jnt_array_(1) = -PI/3.0;
-    //inv_jnt_array_(2) = -PI/3.0;
-    inv_jnt_array_(1) = -PI/15;
+    inv_jnt_array_(1) = -PI/15.0;
+    inv_jnt_array_(2) = 0;
+    //inv_jnt_array_(1) = -PI/15;
     //inv_jnt_array_(4) = 0;
     switch(legt_)
     {
-        case L_F: inv_start2end_ = shoe2base[0]; break;
-        case R_F: inv_start2end_ = shoe2base[1]; break;
-        case L_B: inv_start2end_ = shoe2base[2]; break;
-        case R_B: inv_start2end_ = shoe2base[3]; break;
+        case L_F: inv_start2end_ = feet2torso[0]; break;
+        case R_F: inv_start2end_ = feet2torso[1]; break;
+        case L_B: inv_start2end_ = feet2torso[2]; break;
+        case R_B: inv_start2end_ = feet2torso[3]; break;
     }
 
 }
@@ -246,16 +246,16 @@ int main(int argc, char** argv)
     std::string robot_desc_string;
     n.param("robot_description", robot_desc_string, std::string());
 
-    std::vector<std::string> joint_name = {"l_f_hip_joint", "l_f_limb_joint",
-                                           "r_f_hip_joint", "r_f_limb_joint",
-                                           "l_b_hip_joint", "l_b_limb_joint",
-                                           "r_b_hip_joint", "r_b_limb_joint"};
+    std::vector<std::string> joint_name = {"l_f_hip_joint", "l_f_limb_joint","l_f_feet_joint",
+                                           "r_f_hip_joint", "r_f_limb_joint","r_f_feet_joint",
+                                           "l_b_hip_joint", "l_b_limb_joint","l_b_feet_joint",
+                                           "r_b_hip_joint", "r_b_limb_joint","r_b_feet_joint"};
     // for joints pos pub
     sensor_msgs::JointState joint_state;
     // for odom pub
     geometry_msgs::TransformStamped odom_trans;
     odom_trans.header.frame_id = "odom";
-    odom_trans.child_frame_id = "torso_base";
+      odom_trans.child_frame_id ="torso_base";
 
     // initialize four legs
     LegIK leg_l_f("l_f");
@@ -264,8 +264,8 @@ int main(int argc, char** argv)
     LegIK leg_r_b("r_b");
     std::vector<LegIK> legs{leg_l_f, leg_r_f, leg_l_b, leg_r_b};
 
-    std::vector<std::vector<double>> end_pose(4, std::vector<double>(3, 0.0)); // 4 chain, end pose has 6dof
-    std::vector<std::vector<double>> result(4, std::vector<double>(4, 0.0)); // 4 legs, every leg has 5 joints
+    std::vector<std::vector<double>> end_pose(4, std::vector<double>(6, 0.0)); // 4 chain, end pose has 6dof
+    std::vector<std::vector<double>> result(4, std::vector<double>(3, 0.0)); // 4 legs, every leg has 5 joints
 
     int flag = -1;
     double x_trans = 0;
@@ -319,7 +319,7 @@ int main(int argc, char** argv)
         std::vector<double> new_pos;
         for(int i = 0; i < 4; i ++)
         {
-            for(int j = 0; j < 5; j ++)
+            for(int j = 0; j < 3; j ++)
             {
                 new_pos.push_back(result[i][j]);
             }

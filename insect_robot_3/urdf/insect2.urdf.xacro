@@ -7,6 +7,9 @@
 <xacro:property name="torso_len" value="0.3" />
 <xacro:property name="torso_width" value="0.2" />
 <xacro:property name="torso_hight" value="0.125" />
+
+
+
 <!--##################################################################################-->
 
 
@@ -16,7 +19,7 @@
 <xacro:property name="joint_upper_limit" value="${pi/12}"/>
 <xacro:property name="joint_effort" value="6.0"/>
 <xacro:property name="joint_velocity" value="0.524"/>
-
+  <xacro:property name="feet_radius" value="0.0025"/>
 <xacro:property name="camera_link" value="0.01" /> <!-- Size of square 'camera' box -->
 <!--#################################################################################-->
 <!--macro param-->
@@ -125,7 +128,76 @@
        <axis xyz="0 0 1"/>
   </joint>
 <!--#######################################################################################################-->
+<link name="l_f_feet">
+    <visual>
+        <geometry>
+            <sphere radius="${feet_radius}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <material name="white"/>
+    </visual>
+    <xacro:default_inertial mass="0.2"/>
+</link>
+<joint name="l_f_feet_joint" type="revolute">
+    <axis xyz="0 -1 0"/>
+    <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+    <parent link="l_f_limb"/>
+    <child link="l_f_feet"/>
+    <origin xyz="-0.21 0 0.05"/>
+</joint>
 
+<link name="l_b_feet">
+    <visual>
+        <geometry>
+            <sphere radius="${feet_radius}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <material name="white"/>
+    </visual>
+    <xacro:default_inertial mass="0.2"/>
+</link>
+<joint name="l_b_feet_joint" type="revolute">
+    <axis xyz="0 -1 0"/>
+    <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+    <parent link="l_b_limb"/>
+    <child link="l_b_feet"/>
+    <origin xyz="-0.21 0  0.05"/>
+</joint>
+<link name="r_f_feet">
+    <visual>
+        <geometry>
+            <sphere radius="${feet_radius}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <material name="white"/>
+    </visual>
+    <xacro:default_inertial mass="0.2"/>
+</link>
+<joint name="r_f_feet_joint" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+    <parent link="r_f_limb"/>
+    <child link="r_f_feet"/>
+    <origin xyz="-0.21 0 0.05"/>
+</joint>
+
+<link name="r_b_feet">
+    <visual>
+        <geometry>
+            <sphere radius="${feet_radius}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <material name="white"/>
+    </visual>
+    <xacro:default_inertial mass="0.2"/>
+</link>
+<joint name="r_b_feet_joint" type="revolute">
+    <axis xyz="0 -1 0"/>
+    <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+    <parent link="r_b_limb"/>
+    <child link="r_b_feet"/>
+    <origin xyz="-0.21 0  0.05"/>
+</joint>
 <link name="torso_base">
   <xacro:default_inertial mass="0.0280618431111951"/>
   <!--inertial>

@@ -23,7 +23,7 @@ void LegIK::init()
 
     // base to shoe
     chain_start_ = "torso_base";
-    chain_end_ = name_ +"_limb";
+    chain_end_ = name_ +"_feet";
     tracik_solver_ptr_ = new TRAC_IK::TRAC_IK(chain_start_, chain_end_, urdf_param_, timeout_, eps_);
     bool valid = tracik_solver_ptr_->getKDLChain(chain_);
     if(!valid)
@@ -37,26 +37,26 @@ void LegIK::init()
     }
     fk_solver_ptr_ = new KDL::ChainFkSolverPos_recursive(chain_);
     jnt_array_ = KDL::JntArray(chain_.getNrOfJoints());
-    std::vector<std::vector<double>> base2shoe {{HBDY_L, HIP_L, -LIMB_L, 0, 0, 0},
+    std::vector<std::vector<double>> torso2feet {{HBDY_L, HIP_L, -LIMB_L, 0, 0, 0},
                                                 {HBDY_L, -HIP_L, -LIMB_L, 0, 0, 0},
                                                 {-HBDY_L, HIP_L, -LIMB_L, 0, 0, 0},
                                                 {-HBDY_L, -HIP_L, -LIMB_L, 0, 0, 0}};
     jnt_array_(0) = 0; // shoulder joint
-    jnt_array_(1) = -PI/3.0; // consider as limb joint
-    jnt_array_(2) = -PI/3.0;
-    jnt_array_(3) = -PI/3.0;
-    jnt_array_(4) = 0; // shoe joint
+    jnt_array_(1) = PI/15; // consider as limb joint
+    jnt_array_(2) = 0; //feet joint
+    //jnt_array_(3) = -PI/18;
+    //jnt_array_(4) = 0; // shoe joint
     switch(legt_)
     {
-        case L_F: start2end_ = base2shoe[0]; break;
-        case R_F: start2end_ = base2shoe[1]; break;
-        case L_B: start2end_ = base2shoe[2]; break;
-        case R_B: start2end_ = base2shoe[3]; break;
+        case L_F: start2end_ = torso2feet[0]; break;
+        case R_F: start2end_ = torso2feet[1]; break;
+        case L_B: start2end_ = torso2feet[2]; break;
+        case R_B: start2end_ = torso2feet[3]; break;
     }
 
 
     // shoe to base
-    inv_chain_start_ = name_ + "_limb";
+    inv_chain_start_ = name_ + "_feet";
     inv_chain_end_ = "torso_base";
     inv_tracik_solver_ptr_ = new TRAC_IK::TRAC_IK(inv_chain_start_, inv_chain_end_, urdf_param_, timeout_, eps_);
     valid = inv_tracik_solver_ptr_->getKDLChain(inv_chain_);
@@ -71,21 +71,21 @@ void LegIK::init()
     }
     inv_fk_solver_ptr_ = new KDL::ChainFkSolverPos_recursive(chain_);
     inv_jnt_array_ = KDL::JntArray(chain_.getNrOfJoints());
-    std::vector<std::vector<double>> shoe2base {{-HBDY_L, -HIP_L, LIMB_L, 0, 0, 0},
+    std::vector<std::vector<double>> feet2torso {{-HBDY_L, -HIP_L, LIMB_L, 0, 0, 0},
                                                 {-HBDY_L, HIP_L, LIMB_L, 0, 0, 0},
                                                 {HBDY_L, -HIP_L, LIMB_L, 0, 0, 0},
                                                 {HBDY_L, HIP_L, LIMB_L, 0, 0, 0}};
     inv_jnt_array_(0) = 0;
-    inv_jnt_array_(1) = -PI/3.0;
-    inv_jnt_array_(2) = -PI/3.0;
-    inv_jnt_array_(3) = PI/6.0;
-    inv_jnt_array_(4) = 0;
+    inv_jnt_array_(1) = -PI/15;
+    inv_jnt_array_(2) = 0;
+    //inv_jnt_array_(3) = PI/18;
+    //inv_jnt_array_(4) = 0;
     switch(legt_)
     {
-        case L_F: inv_start2end_ = shoe2base[0]; break;
-        case R_F: inv_start2end_ = shoe2base[1]; break;
-        case L_B: inv_start2end_ = shoe2base[2]; break;
-        case R_B: inv_start2end_ = shoe2base[3]; break;
+        case L_F: inv_start2end_ = feet2torso[0]; break;
+        case R_F: inv_start2end_ = feet2torso[1]; break;
+        case L_B: inv_start2end_ = feet2torso[2]; break;
+        case R_B: inv_start2end_ = feet2torso[3]; break;
     }
 
 }
