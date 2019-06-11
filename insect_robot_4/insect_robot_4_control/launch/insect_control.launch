@@ -1,0 +1,23 @@
+<launch>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find insect_robot_4_control)/config/insect_control.yaml" command="load"/>
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+	output="screen" ns="/insect" args="joint_state_controller
+					                          l_f_hip_joint_position_controller
+                                    r_f_hip_joint_position_controller
+                                    l_b_hip_joint_position_controller
+                                    r_b_hip_joint_position_controller
+                                    l_f_limb_joint_position_controller
+                                    r_f_limb_joint_position_controller
+                                    l_b_limb_joint_position_controller
+                                    r_b_limb_joint_position_controller "/>
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+	respawn="false" output="screen"/>
+
+
+</launch>

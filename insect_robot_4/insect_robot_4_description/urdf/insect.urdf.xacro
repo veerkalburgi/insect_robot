@@ -1,0 +1,638 @@
+<?xml version='1.0'?>
+<robot name="insect" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!--###############################################################################-->
+
+
+
+<!-- Joint properties -->
+<xacro:property name="pi" value="3.1415926535897931"/>
+<xacro:property name="joint_lower_limit" value="-${pi/12}"/>
+<xacro:property name="joint_upper_limit" value="${pi/12}"/>
+<xacro:property name="joint_effort" value="6.0"/>
+<xacro:property name="joint_velocity" value="0.524"/>
+
+<xacro:property name="camera_link" value="0.01" /> <!-- Size of square 'camera' box -->
+<!--#################################################################################-->
+<!--macro param-->
+<xacro:macro name="default_inertial" params="mass">
+   <inertial>
+     <mass value="${mass}" />
+     <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+   </inertial>
+ </xacro:macro>
+ <!--#####################################################################################-->
+<!--link name= "world"/>
+<joint name="world_joint" type="fixed">
+  <origin xyz="0.155823674040498 -0.197142204072068 0.168908258984982 " rpy="0 0 0" />
+  <origin xyz="0 0 0" rpy="0 0 0" />
+  <parent link="world" />
+  <child link="torso_base" />
+  <axis xyz="1 0 0" />
+</joint-->
+<!--################################################################################################-->
+  <!--IMU sensor_link-->
+   <link name="imu_link">
+     <visual>
+       <origin xyz="0 0 0 " rpy="0 0 0" />
+       <geometry>
+         <box size="0.01 0.01 0.01"/> <!--box size="0.001 0.001 0.001"/-->
+       </geometry>
+     </visual>
+     <collision>
+       <origin rpy="0 0 0 " xyz="0 0 0"/>
+       <geometry>
+         <box size="0.01 0.01 0.01 "/> <!--<box size=".001 .001 .001"/-->
+       </geometry>
+     </collision>
+   </link>
+   <!--IMU sensor joint-->
+   <joint name="imu_joint" type="fixed">
+     <axis xyz="0.01 0 0.01"/> <!-- 0 1 0 -->
+     <origin xyz="0.15 -0.1 0.132"/>
+     <parent link="torso_base"/>
+     <child link="imu_link"/>
+   </joint>
+
+   <!--camera link-->
+   <link name="camera_link">
+   <collision>
+     <origin xyz="0 0 0" rpy="0 0 0"/>
+     <geometry>
+   <box size="${camera_link} ${camera_link} ${camera_link}"/>
+     </geometry>
+   </collision>
+
+   <visual>
+     <origin xyz="0 0 0" rpy="0 0 0"/>
+     <geometry>
+   <box size="${camera_link} ${camera_link} ${camera_link}"/>
+     </geometry>
+     <material name="red"/>
+   </visual>
+
+   <inertial>
+     <mass value="1e-5" />
+     <origin xyz="0 0 0" rpy="0 0 0"/>
+     <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+   </inertial>
+ </link>
+    <!--Camera sensor joint-->
+    <joint name="camera_joint" type="fixed">
+   <axis xyz="0 1 0" />
+   <origin xyz="0.155 -0.06 0.25" rpy="0 0 ${pi/2}"/>
+   <parent link="torso_base"/>
+   <child link="camera_link"/>
+ </joint>
+
+   <link name="hokuyo_link">
+       <collision>
+           <origin xyz="0 0 0" rpy="0 0 0"/>
+           <geometry>
+               <box size="0.1 0.1 0.1"/>
+           </geometry>
+       </collision>
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+           <geometry>
+
+               <mesh filename="package://insect_1_description/meshes/hokuyo.dae"/>
+           </geometry>
+
+       <visual>
+           <origin xyz="0 0 0" rpy="0 0 0"/>
+           <geometry>
+
+               <mesh filename="package://insect_1_description/meshes/hokuyo.dae"/>
+           </geometry>
+       </visual>
+
+       <inertial>
+           <mass value="1e-5" />
+           <origin xyz="0 0 0" rpy="0 0 0"/>
+           <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+       </inertial>
+   </link>
+
+   <joint name="hokuyo_joint" type="fixed">
+       <origin xyz="0.155 -0.10 0.28" rpy="0 0 ${pi/2  }"/>
+       <parent link="torso_base"/>
+       <child link="hokuyo_link"/>
+       <axis xyz="0 0 1"/>
+  </joint>
+<!--#######################################################################################################-->
+
+<link name="torso_base">
+  <inertial>
+    <origin
+      xyz="0.155823674040498 -0.197142204072068 0.168908258984982"
+      rpy="0 0 0" />
+    <mass
+      value="1.09435213027821" />
+    <inertia
+      ixx="1.0"
+      ixy="0"
+      ixz="0"
+      iyy="1.0"
+      iyz="0"
+      izz="1.0" />
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <mesh filename="package://insect_1_description/meshes/Torso.STL" />
+    </geometry>
+
+    <material name="">
+      <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+    </material>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <mesh filename="package://insect_1_description/meshes/Torso.STL" />
+    </geometry>
+  </collision>
+</link>
+
+<link name="r_f_hip">
+  <xacro:default_inertial mass="0.0280618431111951"/>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <mesh filename="package://insect_1_description/meshes/Empty_Link1.STL" />
+    </geometry>
+    <material name="">
+      <color rgba="1 1 1 1" />
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <mesh filename="package://insect_1_description/meshes/Empty_Link1.STL" />
+    </geometry>
+  </collision>
+</link>
+
+<joint name="r_f_hip_joint" type="revolute">
+  <origin xyz="0.225625426875454 -0.0726422157817547 0.0399579697018457" rpy="3.14159265358979 -1.14416883366802 1.34706698920462E-16" />
+  <parent link="torso_base" />
+  <child link="r_f_hip" />
+  <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+  <axis xyz="1 0 0" />
+  </joint>
+
+  <link name="r_f_limb">
+    <xacro:default_inertial mass="0.0803002951506127"/>
+    <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+          <mesh filename="package://insect_1_description/meshes/Empty_Link11.STL" />
+          </geometry>
+          <material name="">
+            <color rgba="1 1 1 1" />
+          </material>
+        </visual>
+
+        <collision>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+          <mesh filename="package://insect_1_description/meshes/Empty_Link11.STL" />
+          </geometry>
+        </collision>
+      </link>
+
+
+    <joint name="r_f_limb_joint" type="revolute">
+      <origin xyz="0.177388243676325 0 0.129225262065832" rpy="0 0.426627493126876 0" />
+      <parent link="r_f_hip" />
+      <child link="r_f_limb" />
+        <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <link name="r_b_hip">
+      <xacro:default_inertial mass="0.0280618431112051"/>
+      <visual>
+       <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://insect_1_description/meshes/Empty_Link2.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="1 1 1 1" />
+        </material>
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://insect_1_description/meshes/Empty_Link2.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="r_b_hip_joint" type="revolute">
+      <origin xyz="0.225625426875454 -0.321642215781755 0.0399579697018457" rpy="3.14159265358979 -1.14416883366802 1.34706698920462E-16" />
+      <parent link="torso_base" />
+      <child link="r_b_hip" />
+      <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+      <axis xyz="1 0 0" />
+    </joint>
+
+    <link name="r_b_limb">
+      <xacro:default_inertial mass="0.0803002951506128"/>
+       <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://insect_1_description/meshes/Empty_Link22.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="1 1 1 1" />
+        </material>
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://insect_1_description/meshes/Empty_Link22.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint
+      name="r_b_limb_joint" type="revolute">
+      <origin xyz="0.177388243676325 0 0.129225262065832" rpy="0 0.426627493126876 0" />
+      <parent link="r_b_hip" />
+      <child link="r_b_limb" />
+      <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+      <axis xyz="0 1 0" />
+    </joint>
+
+    <link name="l_f_hip">
+      <xacro:default_inertial mass="0.028061843111217"/>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://insect_1_description/meshes/Empty_Link3.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="1 1 1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://insect_1_description/meshes/Empty_Link3.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="l_f_hip_joint" type="revolute">
+      <origin xyz="0.0489501433341401 -0.0726422157817548 0.121498471038666" rpy="-3.14159265358979 -1.14416883366802 3.14159265358979" />
+      <parent link="torso_base" />
+      <child link="l_f_hip" />
+      <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+      <axis xyz="1 0 0" />
+    </joint>
+
+    <link name="l_f_limb">
+      <xacro:default_inertial mass="0.0803002951506917"/>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://insect_1_description/meshes/Empty_Link33.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="1 1 1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://insect_1_description/meshes/Empty_Link33.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="l_f_limb_joint" type="revolute">
+      <origin xyz="0.0878154069775051 0 0.129225262065832" rpy="0 0.426627493126877 0" />
+      <parent link="l_f_hip" />
+      <child link="l_f_limb" />
+      <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+      <axis xyz="0 -1 0" />
+    </joint>
+
+    <link name="l_b_hip">
+      <xacro:default_inertial mass="0.0280618431112177"/>
+      <inertial>
+        <origin xyz="0.0469971216311395 -0.000689624605971217 0.0756385827767793" rpy="0 0 0" />
+        <mass value="0.0280618431112177" />
+        <inertia ixx="0" ixy="0" ixz="0"
+                 iyy="0" iyz="0"
+                 izz="0" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://insect_1_description/meshes/Empty_Link4.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="1 1 1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://insect_1_description/meshes/Empty_Link4.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="l_b_hip_joint" type="revolute">
+      <origin xyz="0.0489501433341401 -0.321642215781755 0.121498471038666" rpy="-3.14159265358979 -1.14416883366802 3.14159265358979" />
+      <parent link="torso_base" />
+      <child link="l_b_hip" />
+      <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+      <axis xyz="1 0 0" />
+    </joint>
+    <link name="l_b_limb">
+      <xacro:default_inertial mass="0.0803002951506863"/>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://insect_1_description/meshes/Empty_Link44.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="1 1 1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://insect_1_description/meshes/Empty_Link44.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="l_b_limb_joint" type="revolute">
+      <origin xyz="0.087815406977505 0 0.129225262065832" rpy="0 0.426627493126876 0" />
+      <parent link="l_b_hip" />
+      <child link="l_b_limb" />
+      <limit lower="${joint_lower_limit}" upper="${joint_upper_limit}" effort="${joint_effort}" velocity="${joint_velocity}"/>
+      <axis xyz="0 -1 0" />
+    </joint>
+
+<!--######################################################################################################################################-->
+<transmission name="l_f_hip_transmission">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="l_f_hip_joint">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="l_f_hip_motor">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="l_b_hip_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="l_b_hip_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="l_b_hip_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<transmission name="r_f_hip_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="r_f_hip_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="r_f_hip_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<transmission name="r_b_hip_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="r_b_hip_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="r_b_hip_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<transmission name="l_f_limb_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="l_f_limb_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="l_f_limb_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<transmission name="l_b_limb_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="l_b_limb_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="l_b_limb_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<transmission name="r_f_limb_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="r_f_limb_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="r_f_limb_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+ <transmission name="r_b_limb_transmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="r_b_limb_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="r_b_limb_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+<!--###################################################################################-->
+
+
+
+<!--####################################################################################-->
+<!--contact_sensor_torso_base-->
+<gazebo reference="torso_base">
+  <sensor name="contact_sensor" type="contact">
+    <always_on>true</always_on>
+    <update_rate>15.0</update_rate>
+    <contact>
+      <collision>collision</collision>
+    </contact>
+    <plugin filename="libgazebo_ros_bumper.so" name="gazebo_ros_bumper_controller">
+       <bumperTopicName>torso_contact_info</bumperTopicName>
+      <frameName>torso_base</frameName>
+    </plugin>
+  </sensor>
+</gazebo>
+<!--########################################################################################-->
+<gazebo>
+     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+       <robotNamespace>/insect</robotNamespace>
+       <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+       <legacyModeNS>true</legacyModeNS>
+     </plugin>
+</gazebo>
+
+<gazebo>
+  <plugin name="f3d_controller" filename="libgazebo_ros_f3d.so">
+    <robotNamespace>/insect</robotNamespace>
+    <alwaysOn>true</alwaysOn>
+    <updateRate>50</updateRate>
+    <bodyName>l_f_limb</bodyName>
+    <topicName>l_f_limb_ground_feedback</topicName>
+    <frameName>l_f_limb</frameName>
+    </plugin>
+</gazebo>
+
+<gazebo>
+  <plugin name="f3d_controller" filename="libgazebo_ros_f3d.so">
+    <robotNamespace>/insect</robotNamespace>
+    <alwaysOn>true</alwaysOn>
+    <updateRate>50</updateRate>
+    <bodyName>r_f_limb</bodyName>
+    <topicName>r_f_limb_ground_feedback</topicName>
+    <frameName>r_f_limb</frameName>
+    </plugin>
+</gazebo>
+
+<gazebo>
+  <plugin name="f3d_controller" filename="libgazebo_ros_f3d.so">
+    <robotNamespace>/insect</robotNamespace>
+    <alwaysOn>true</alwaysOn>
+    <updateRate>50</updateRate>
+    <bodyName>l_b_limb</bodyName>
+    <topicName>l_b_limb_ground_feedback</topicName>
+    <frameName>l_b_limb</frameName>
+    </plugin>
+</gazebo>
+<gazebo>
+  <plugin name="f3d_controller" filename="libgazebo_ros_f3d.so">
+    <robotNamespace>/insect</robotNamespace>
+    <alwaysOn>true</alwaysOn>
+    <updateRate>50</updateRate>
+    <bodyName>r_b_limb</bodyName>
+    <topicName>r_b_limb_ground_feedback</topicName>
+    <frameName>r_b_limb</frameName>
+    </plugin>
+</gazebo  >
+<!--################################################################################################-->
+<gazebo>
+    <plugin name="gazebo_ros_imu_controller" filename="libgazebo_ros_imu.so">
+        <robotNamespace>/insect</robotNamespace>
+        <topicName>imu/data</topicName>
+        <serviceName>imu/service</serviceName>
+        <bodyName>torso_base</bodyName>
+        <gaussianNoise>0</gaussianNoise>
+        <rpyOffsets>0 0 0</rpyOffsets>
+        <updateRate>10.0</updateRate>
+        <alwaysOn>true</alwaysOn>
+        <gaussianNoise>0</gaussianNoise>
+    </plugin>
+</gazebo>
+<!--###################################################################################################-->
+<gazebo reference="hokuyo_link">
+    <sensor type="ray" name="head_hokuyo_sensor">
+        <pose>0 0 0 0 0 0</pose>
+        <visualize>true</visualize>
+        <update_rate>60</update_rate>
+        <ray>
+            <scan>
+            <horizontal>
+                <samples>720</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.785</min_angle>
+                <max_angle>0.785</max_angle>
+            </horizontal>
+            </scan>
+            <range>
+                <min>0.10</min>
+                <max>5.0</max>
+                <resolution>0.01</resolution>
+            </range>
+            <noise>
+                <type>gaussian</type>
+                <!-- Noise parameters based on published spec for Hokuyo laser
+                    achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
+                    stddev of 0.01m will put 99.7% of samples within 0.03m of the true
+                    reading. -->
+                <mean>0.0</mean>
+                <stddev>0.01</stddev>
+            </noise>
+        </ray>
+        <plugin name="laser" filename="libgazebo_ros_laser.so">
+            <topicName>/scan</topicName>
+            <frameName>hokuyo_link</frameName>
+        </plugin>
+    </sensor>
+</gazebo>
+
+<!-- camera -->
+<!-- camera -->
+  <gazebo reference="camera_link">
+    <sensor type="camera" name="camera1">
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise is sampled independently per pixel on each frame.
+               That pixel's noise value is added to each of its color
+               channels, which at that point lie in the range [0,1]. -->
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>insect1/camera1</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+<!--############################################################################################################-->
+  </robot>

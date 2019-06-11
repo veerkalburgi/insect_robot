@@ -1,0 +1,14 @@
+controller_list:
+  - name: fake_insect_leg_controller
+    joints:
+      - l_b_hip_joint
+      - l_b_limb_joint
+      - l_f_hip_joint
+      - l_f_limb_joint
+      - r_b_hip_joint
+      - r_b_limb_joint
+      - r_f_hip_joint
+      - r_f_limb_joint
+  - name: fake_insect_sensor_controller
+    joints:
+      []

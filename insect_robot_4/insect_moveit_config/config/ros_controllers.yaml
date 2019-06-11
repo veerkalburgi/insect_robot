@@ -1,0 +1,80 @@
+insect:
+# MoveIt-specific simulation settings
+  moveit_sim_hw_interface:
+    joint_model_group: controllers_initial_group_
+    joint_model_group_pose: controllers_initial_pose_
+# Settings for ros_control control loop
+  generic_hw_control_loop:
+    loop_hz: 300
+    cycle_time_error_threshold: 0.01
+# Settings for ros_control hardware interface
+  hardware_interface:
+    joints:
+      - l_b_hip_joint
+      - l_b_limb_joint
+      - l_f_hip_joint
+      - l_f_limb_joint
+      - r_b_hip_joint
+      - r_b_limb_joint
+      - r_f_hip_joint
+      - r_f_limb_joint
+    sim_control_mode: 1  # 0: position, 1: velocity
+# Publish all joint states
+# Creates the /joint_states topic necessary in ROS
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+  controller_list:
+    []
+  leg_postion_controller:
+    type: position_controllers/JointPositionController
+    joints:
+      - l_b_hip_joint
+      - l_b_limb_joint
+      - l_f_hip_joint
+      - l_f_limb_joint
+      - r_b_hip_joint
+      - r_b_limb_joint
+      - r_f_hip_joint
+      - r_f_limb_joint
+    gains:
+      l_b_hip_joint:
+        p: 100
+        d: 1
+        i: 1
+        i_clamp: 1
+      l_b_limb_joint:
+        p: 100
+        d: 1
+        i: 1
+        i_clamp: 1
+      l_f_hip_joint:
+        p: 100
+        d: 1
+        i: 1
+        i_clamp: 1
+      l_f_limb_joint:
+        p: 100
+        d: 1
+        i: 1
+        i_clamp: 1
+      r_b_hip_joint:
+        p: 100
+        d: 1
+        i: 1
+        i_clamp: 1
+      r_b_limb_joint:
+        p: 100
+        d: 1
+        i: 1
+        i_clamp: 1
+      r_f_hip_joint:
+        p: 100
+        d: 1
+        i: 1
+        i_clamp: 1
+      r_f_limb_joint:
+        p: 100
+        d: 1
+        i: 1
+        i_clamp: 1

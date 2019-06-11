@@ -1,0 +1,109 @@
+<?xml version="1.0" ?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="insect">
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <group name="insect_leg">
+        <joint name="base_joint" />
+        <joint name="l_b_hip_joint" />
+        <joint name="l_b_limb_joint" />
+        <joint name="l_f_hip_joint" />
+        <joint name="l_f_limb_joint" />
+        <joint name="r_b_hip_joint" />
+        <joint name="r_b_limb_joint" />
+        <joint name="r_f_hip_joint" />
+        <joint name="r_f_limb_joint" />
+    </group>
+    <group name="insect_sensor">
+        <joint name="camera_joint" />
+        <joint name="hokuyo_joint" />
+        <joint name="imu_joint" />
+        <joint name="base_joint" />
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="home" group="insect_leg">
+        <joint name="l_b_hip_joint" value="0" />
+        <joint name="l_b_limb_joint" value="0" />
+        <joint name="l_f_hip_joint" value="-0.0029" />
+        <joint name="l_f_limb_joint" value="0" />
+        <joint name="r_b_hip_joint" value="0" />
+        <joint name="r_b_limb_joint" value="0" />
+        <joint name="r_f_hip_joint" value="0" />
+        <joint name="r_f_limb_joint" value="0" />
+    </group_state>
+    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
+    <virtual_joint name="base_joint" type="fixed" parent_frame="base" child_link="torso_base" />
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="camera_link" link2="hokuyo_link" reason="Default" />
+    <disable_collisions link1="camera_link" link2="imu_link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="l_b_hip" reason="Never" />
+    <disable_collisions link1="camera_link" link2="l_b_limb" reason="Never" />
+    <disable_collisions link1="camera_link" link2="l_f_hip" reason="Never" />
+    <disable_collisions link1="camera_link" link2="l_f_limb" reason="Never" />
+    <disable_collisions link1="camera_link" link2="r_b_hip" reason="Never" />
+    <disable_collisions link1="camera_link" link2="r_b_limb" reason="Never" />
+    <disable_collisions link1="camera_link" link2="r_f_hip" reason="Never" />
+    <disable_collisions link1="camera_link" link2="r_f_limb" reason="Never" />
+    <disable_collisions link1="camera_link" link2="torso_base" reason="Adjacent" />
+    <disable_collisions link1="hokuyo_link" link2="imu_link" reason="Never" />
+    <disable_collisions link1="hokuyo_link" link2="l_b_hip" reason="Never" />
+    <disable_collisions link1="hokuyo_link" link2="l_b_limb" reason="Never" />
+    <disable_collisions link1="hokuyo_link" link2="l_f_hip" reason="Never" />
+    <disable_collisions link1="hokuyo_link" link2="l_f_limb" reason="Never" />
+    <disable_collisions link1="hokuyo_link" link2="r_b_hip" reason="Never" />
+    <disable_collisions link1="hokuyo_link" link2="r_b_limb" reason="Never" />
+    <disable_collisions link1="hokuyo_link" link2="r_f_hip" reason="Never" />
+    <disable_collisions link1="hokuyo_link" link2="r_f_limb" reason="Never" />
+    <disable_collisions link1="hokuyo_link" link2="torso_base" reason="Adjacent" />
+    <disable_collisions link1="imu_link" link2="l_b_hip" reason="Never" />
+    <disable_collisions link1="imu_link" link2="l_b_limb" reason="Never" />
+    <disable_collisions link1="imu_link" link2="l_f_hip" reason="Never" />
+    <disable_collisions link1="imu_link" link2="l_f_limb" reason="Never" />
+    <disable_collisions link1="imu_link" link2="r_b_hip" reason="Never" />
+    <disable_collisions link1="imu_link" link2="r_b_limb" reason="Never" />
+    <disable_collisions link1="imu_link" link2="r_f_hip" reason="Never" />
+    <disable_collisions link1="imu_link" link2="r_f_limb" reason="Never" />
+    <disable_collisions link1="imu_link" link2="torso_base" reason="Adjacent" />
+    <disable_collisions link1="l_b_hip" link2="l_b_limb" reason="Adjacent" />
+    <disable_collisions link1="l_b_hip" link2="l_f_hip" reason="Never" />
+    <disable_collisions link1="l_b_hip" link2="l_f_limb" reason="Never" />
+    <disable_collisions link1="l_b_hip" link2="r_b_hip" reason="Never" />
+    <disable_collisions link1="l_b_hip" link2="r_b_limb" reason="Never" />
+    <disable_collisions link1="l_b_hip" link2="r_f_hip" reason="Never" />
+    <disable_collisions link1="l_b_hip" link2="r_f_limb" reason="Never" />
+    <disable_collisions link1="l_b_hip" link2="torso_base" reason="Adjacent" />
+    <disable_collisions link1="l_b_limb" link2="l_f_hip" reason="Never" />
+    <disable_collisions link1="l_b_limb" link2="l_f_limb" reason="Never" />
+    <disable_collisions link1="l_b_limb" link2="r_b_hip" reason="Never" />
+    <disable_collisions link1="l_b_limb" link2="r_b_limb" reason="Never" />
+    <disable_collisions link1="l_b_limb" link2="r_f_hip" reason="Never" />
+    <disable_collisions link1="l_b_limb" link2="r_f_limb" reason="Never" />
+    <disable_collisions link1="l_b_limb" link2="torso_base" reason="Never" />
+    <disable_collisions link1="l_f_hip" link2="l_f_limb" reason="Adjacent" />
+    <disable_collisions link1="l_f_hip" link2="r_b_hip" reason="Never" />
+    <disable_collisions link1="l_f_hip" link2="r_b_limb" reason="Never" />
+    <disable_collisions link1="l_f_hip" link2="r_f_hip" reason="Never" />
+    <disable_collisions link1="l_f_hip" link2="r_f_limb" reason="Never" />
+    <disable_collisions link1="l_f_hip" link2="torso_base" reason="Adjacent" />
+    <disable_collisions link1="l_f_limb" link2="r_b_hip" reason="Never" />
+    <disable_collisions link1="l_f_limb" link2="r_b_limb" reason="Never" />
+    <disable_collisions link1="l_f_limb" link2="r_f_hip" reason="Never" />
+    <disable_collisions link1="l_f_limb" link2="r_f_limb" reason="Never" />
+    <disable_collisions link1="l_f_limb" link2="torso_base" reason="Never" />
+    <disable_collisions link1="r_b_hip" link2="r_b_limb" reason="Adjacent" />
+    <disable_collisions link1="r_b_hip" link2="r_f_hip" reason="Never" />
+    <disable_collisions link1="r_b_hip" link2="r_f_limb" reason="Never" />
+    <disable_collisions link1="r_b_hip" link2="torso_base" reason="Adjacent" />
+    <disable_collisions link1="r_b_limb" link2="r_f_hip" reason="Never" />
+    <disable_collisions link1="r_b_limb" link2="r_f_limb" reason="Never" />
+    <disable_collisions link1="r_b_limb" link2="torso_base" reason="Never" />
+    <disable_collisions link1="r_f_hip" link2="r_f_limb" reason="Adjacent" />
+    <disable_collisions link1="r_f_hip" link2="torso_base" reason="Adjacent" />
+    <disable_collisions link1="r_f_limb" link2="torso_base" reason="Never" />
+</robot>

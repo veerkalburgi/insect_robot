@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: insect_1_description
+    relative_path: urdf/insect.urdf.xacro
+    xacro_args: "--inorder "
+  SRDF:
+    relative_path: config/insect.srdf
+  CONFIG:
+    author_name: Veer Kalburgi
+    author_email: veerkalburgi@gmail.com
+    generated_timestamp: 1560059868

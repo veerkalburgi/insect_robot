@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <arg name="paused" default="false"/>
+  <arg name="move_base"    default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <!--#######################################################################################################-->
+<include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="worlds/empty_sky.world"/>
+    <arg name="paused" value="true"/>
+  </include>
+<!--##################################################################################################-->
+   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find insect_robot_4_description)/urdf/insect.urdf.xacro " />
+   <param name="use_gui" value="True"/>
+   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen"  args="-param robot_description -urdf -model insect"/>
+   <include file="$(find insect_robot_4_control)/launch/insect_control.launch" />
+   <node name="pos_pub_node" pkg="insect_robot_4_control" type="pos_pub.py" respawn="true"/>
+
+</launch>
